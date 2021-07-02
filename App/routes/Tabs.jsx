@@ -37,8 +37,7 @@ export const Tabs = () => {
         }
     })
 
-    const navigationState = useRoute()
-    const { state } = navigationState
+    const { state } = useRoute()
     let currentRoute = 'Home'
     let buttonTitle = ''
     if (state) currentRoute = state.routeNames[state.index]

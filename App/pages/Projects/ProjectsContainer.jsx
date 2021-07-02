@@ -4,8 +4,11 @@ import { useNavigation } from '@react-navigation/native';
 
 export const ProjectsContainer = (props) => {
     const navigation = useNavigation();
-    const pressHandler = () => {
-        navigation.push('Editor')
+    const pressHandler = (params) => {
+        navigation.push('Project', {
+            screen: 'Project Page',
+            params: { ...params }
+        })
     }
-    return <ProjectsView pressHandler={pressHandler} {...props}/>
+    return <ProjectsView pressHandler={pressHandler} {...props} />
 }

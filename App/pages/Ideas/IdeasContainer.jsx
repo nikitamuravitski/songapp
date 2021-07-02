@@ -7,5 +7,5 @@ export const IdeasContainer = (props) => {
     const pressHandler = (params) => {
         navigation.push('Editor', { ...params })
     }
-    return <IdeasView pressHandler={pressHandler} {...props}/>
+    return <IdeasView pressHandler={pressHandler} {...props} />
 }

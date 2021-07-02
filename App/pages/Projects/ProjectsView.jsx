@@ -1,41 +1,45 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, FlatList } from 'react-native'
+import { useSelector } from 'react-redux'
 import { Paper } from '../../components/Paper'
 
 export const ProjectsView = ({ recent, pressHandler }) => {
-    const data = [
-        {
-            name: 'Project 1',
-            content: {
-                sections: ['asdfja jasdlk jasdfkl ', 'cpovbirncvbpowen']
-            }
-        },
-        {
-            name: 'Project 2',
-            content: {
-                sections: ['sadhiu oidkjfgjio oidfg ', 'jsdfgjlkj jd dgj']
-            }
+  let projectsData = useSelector(state => state.Projects.projectsData)
+  projectsData = Array.from(Object.values(projectsData))
+  console.log(projectsData)
+  let recentProjectsData = projectsData.slice(0, 3)
+  if (recent) {
+    return <View>
+      <Text>Recent Projects</Text>
+      <FlatList
+        data={recentProjectsData}
+        keyExtractor={(item) => item.projectUuid}
+        renderItem={({ item }) => {
+          return <Paper
+            uuid={item.projectUuid}
+            key={item.projectUuid}
+            name={item.name}
+            content={item.sections[Object.keys(item.sections)[0]].content}
+            type='PROJECT'
+            pressHandler={pressHandler} />
         }
-    ]
-    if (recent) {
-        const renderList = data.map(project => <Paper 
-            key={project.name} 
-            name={project.name} 
-            content={project.content.sections[0] + project.content.sections[1]} // gibberish for now
-            onPressHandler={pressHandler}
-            />)
-        return (
-            <View>
-                <Text>Recent Projects</Text>
-                {renderList}
-            </View>
-        )
-    }
-    return (
-        <View>
-            <Text>
-                Projects Screen
-            </Text>
-        </View>
-    )
+        }
+      />
+    </View>
+  } else {
+    return <View>
+      <FlatList
+        data={projectsData}
+        keyExtractor={(item) => item.projectUuid}
+        renderItem={({ item }) => <Paper
+          uuid={item.projectUuid}
+          key={item.projectUuid}
+          name={item.name}
+          content={item.sections[Object.keys(item.sections)[0]].content}
+          type='PROJECT'
+          pressHandler={pressHandler} />}
+      />
+    </View>
+  }
 }
+

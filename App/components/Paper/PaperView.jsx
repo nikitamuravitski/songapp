@@ -5,16 +5,17 @@ export const PaperView = (props) => {
         uuid,
         content,
         name,
-        onPressHandler
+        type,
+        pressHandler
     } = props
     return (
-        <TouchableOpacity onPress={() => onPressHandler({ name, uuid })} style={styles.container}>
+        <TouchableOpacity onPress={() => pressHandler({ name, uuid, type })} style={styles.container}>
             <View>
-                <View style={styles.name}>
-                    {name && <Text>{name}</Text>}
+                <View>
+                    {name ? <Text style={styles.name}>{name}</Text> : null}
                 </View>
                 <View>
-                    {content && <Text>{content}</Text>}
+                    {content ? <Text style={styles.content}>{content}</Text> : null}
                 </View>
             </View>
         </TouchableOpacity>
@@ -23,7 +24,6 @@ export const PaperView = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-
         backgroundColor: '#ffffff',
         borderRadius: 4,
         shadowColor: "#000",
@@ -38,5 +38,13 @@ const styles = StyleSheet.create({
 
         padding: 20,
         margin: 10,
+    },
+    name: {
+        fontSize: 17,
+        marginBottom: 4
+    },
+    content: {
+        lineHeight: 26,
+        marginLeft: 6
     }
 })
