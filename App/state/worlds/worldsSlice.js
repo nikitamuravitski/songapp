@@ -16,8 +16,7 @@ const worldsSlice = createSlice({
 
   reducers: {
     setCurrentWorldUuid: (state, action) => {
-      const { worldUuid } = action.payload
-      state.currentWorldUuid = worldUuid
+      state.currentWorldUuid = action.payload
     },
     createWorld: (state, action) => {
       const { uuid, name } = action.payload

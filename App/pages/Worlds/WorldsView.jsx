@@ -10,7 +10,7 @@ export const WorldsView = ({ data }) => {
   console.log(data)
   const dispatch = useDispatch()
   useEffect(() => () => {
-    dispatch(setCurrentWorldUuid({ worldUuid: null }))
+    dispatch(setCurrentWorldUuid(null))
   }, [])
   return (
     <View>

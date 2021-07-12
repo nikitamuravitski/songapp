@@ -24,23 +24,7 @@ export const EditorContainer = (props) => {
     hasName = false
   }
   if (route.params.type === 'PROJECT') {
-    const temp = []
-    data = useSelector(getCurrentProject)
-    if (data.sectionsOrder) {
-      data.sectionsOrder.forEach(uuid => {
-        temp.push(data.sections[uuid])
-      })
-      data = temp
-    } else {
-      data = Array.from(Object.values(data.sections))
-    }
-    changeContentHandler = (sectionUuid, content) => {
-      dispatch(changeSectionContent({ projectUuid: route.params.uuid, sectionUuid, content }))
-    }
-    changeSectionNameHandler = (sectionUuid, name) => {
-      dispatch(changeSectionName({ projectUuid: route.params.uuid, sectionUuid, name }))
-    }
-    hasName = true
+
   }
   return (
     <EditorView

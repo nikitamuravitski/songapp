@@ -13,7 +13,7 @@ export const IdeasContainer = ({ recent }) => {
 
   const pressHandler = (params) => {
     navigation.push('Editor', { ...params })
-    dispatch(setCurrentIdeaUuid({ ideaUuid: params.uuid }))
+    dispatch(setCurrentIdeaUuid(params.uuid))
   }
   if (recent) {
     data = data.slice(0, 3)

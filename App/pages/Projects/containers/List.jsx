@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getProjectsData, setCurrentProjectUuid } from '../../../state/projects'
 import { setCurrentWorldUuid } from '../../../state/worlds'
 
-import ListView from '../views/List'
+import ListView from '../components/List'
 
 export default ({ recent }) => {
   const dispatch = useDispatch()
@@ -14,7 +14,7 @@ export default ({ recent }) => {
 
   const pressHandler = projectUuid => {
     const project = projects[projectUuid]
-
+    console.log(projectUuid)
     dispatch(setCurrentProjectUuid(projectUuid))
     dispatch(setCurrentWorldUuid(project.worldUuid))
 

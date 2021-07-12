@@ -54,8 +54,7 @@ const projectsSlice = createSlice({
   },
   reducers: {
     setCurrentProjectUuid: (state, action) => {
-      const { projectUuid } = action.payload
-      state.currentProjectUuid = projectUuid
+      state.currentProjectUuid = action.payload
     },
     changeSectionContent: (state, action) => {
       const { projectUuid, sectionUuid, content } = action.payload

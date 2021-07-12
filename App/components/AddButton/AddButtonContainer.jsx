@@ -19,11 +19,11 @@ export const AddButtonContainer = (props) => {
       const ideaUuid = `idea.${uuid.v4()}`
       if (props.projectUuid) {
         const worldUuid = projectData[props.projectUuid].worldUuid
-        dispatch(setCurrentIdeaUuid({ ideaUuid: ideaUuid }))
+        dispatch(setCurrentIdeaUuid(ideaUuid))
         dispatch(createIdea({ uuid: ideaUuid, worldUuid: worldUuid }))
         dispatch(addIdeaToWorld({ ideaUuid: ideaUuid, worldUuid: worldUuid }))
       } else {
-        dispatch(setCurrentIdeaUuid({ ideaUuid: ideaUuid }))
+        dispatch(setCurrentIdeaUuid(ideaUuid))
         dispatch(createIdea({ uuid: ideaUuid, worldUuid: 'unsorted' }))
         dispatch(addIdeaToWorld({ ideaUuid: ideaUuid, worldUuid: 'unsorted' }))
       }
@@ -36,9 +36,9 @@ export const AddButtonContainer = (props) => {
       const worldUuid = `world.${uuid.v4()}`
       const sectionUuid = `section.${uuid.v4()}`
       const projectName = 'New Project'
-      dispatch(setCurrentProjectUuid({ projectUuid: projectUuid }))
+      dispatch(setCurrentProjectUuid(projectUuid))
       dispatch(createProject({ projectUuid: projectUuid, worldUuid: worldUuid, name: 'New Project', sectionUuid: sectionUuid }))
-      dispatch(setCurrentWorldUuid({ worldUuid: worldUuid }))
+      dispatch(setCurrentWorldUuid(worldUuid))
       dispatch(createWorld({ uuid: worldUuid, name: `World for ${projectName}` }))
       navigation.navigate('Project', {
         screen: 'Project Page',
