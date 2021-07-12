@@ -8,11 +8,10 @@ import { useSelector } from 'react-redux'
 const Tab = createMaterialTopTabNavigator()
 
 export const Project = ({ route }) => {
-  const worldUuid = useSelector(state => state.Projects.projectsData[route.params.params.uuid].worldUuid)
   return <>
     <Tab.Navigator>
       <Tab.Screen name='Project Page' component={Editor} />
-      <Tab.Screen name='World of Project' component={() => <Worlds worldUuid={worldUuid} />} />
+      <Tab.Screen name='World of Project' component={Worlds} />
     </Tab.Navigator>
     <AddButton buttonTitle='Add Idea' projectUuid={route.params.params.uuid} />
   </>

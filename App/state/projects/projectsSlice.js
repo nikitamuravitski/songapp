@@ -3,6 +3,7 @@ import { createSlice, current } from "@reduxjs/toolkit";
 const projectsSlice = createSlice({
   name: 'projects',
   initialState: {
+    currentProjectUuid: null,
     projects: ['papa'], // ['projectuuid', ...]
     projectsData: {
       'papa': {
@@ -52,6 +53,10 @@ const projectsSlice = createSlice({
     } // {projectUuid: {uuid: string, name: string, content: object }}
   },
   reducers: {
+    setCurrentProjectUuid: (state, action) => {
+      const { projectUuid } = action.payload
+      state.currentProjectUuid = projectUuid
+    },
     changeSectionContent: (state, action) => {
       const { projectUuid, sectionUuid, content } = action.payload
       state.projectsData[projectUuid].sections[sectionUuid].content = content
@@ -98,7 +103,7 @@ const projectsSlice = createSlice({
   }
 })
 
-export const { createProject, changeSectionContent, changeSectionName, addSection } = projectsSlice.actions
+export const { createProject, changeSectionContent, changeSectionName, addSection, setCurrentProjectUuid } = projectsSlice.actions
 export const { reducer } = projectsSlice
 
 

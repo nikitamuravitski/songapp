@@ -2,7 +2,7 @@ import React from 'react'
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
 import uuid from 'react-native-uuid'
 import { useDispatch } from 'react-redux'
-import { addSection } from '../../../slices/projectsSlice'
+import { addSection } from '../../../state/projects'
 
 export const AddSectionButton = ({ index, projectUuid }) => {
 

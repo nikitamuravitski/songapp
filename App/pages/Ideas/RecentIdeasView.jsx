@@ -1,10 +1,9 @@
 import React from 'react'
-import { View, Text, FlatList } from 'react-native'
-import { useSelector } from 'react-redux'
+import { Text, FlatList, View } from 'react-native'
 import { Paper } from '../../components/Paper'
-
-export const IdeasView = ({ pressHandler, data }) => {
+export const RecentIdeasView = ({ data, pressHandler }) => {
   return <View>
+    <Text>Recent Ideas</Text>
     <FlatList
       data={data}
       keyExtractor={(item) => item.uuid}
@@ -17,4 +16,3 @@ export const IdeasView = ({ pressHandler, data }) => {
         pressHandler={pressHandler} />} />
   </View>
 }
-

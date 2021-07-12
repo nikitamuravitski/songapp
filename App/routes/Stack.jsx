@@ -18,7 +18,6 @@ export const StackNavigator = () => {
       <Stack.Screen
         name='Editor'
         component={Editor}
-        getId={({ params }) => params.uuid}
         options={({ route }) => ({
           title: route.params.name
         })

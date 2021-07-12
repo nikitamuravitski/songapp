@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { reducer as Ideas } from './slices/ideasSlice'
-import { reducer as Projects } from './slices/projectsSlice'
-import { reducer as Worlds } from './slices/worldsSlice'
+import { reducer as Ideas } from './state/ideas'
+
+import { reducer as Projects } from './state/projects'
+import { reducer as Worlds } from './state/worlds'
 const store = configureStore({
   reducer: {
     Ideas,

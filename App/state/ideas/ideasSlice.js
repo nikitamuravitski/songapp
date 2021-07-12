@@ -3,12 +3,16 @@ import { createSelector, createSlice, current } from "@reduxjs/toolkit";
 const ideasSlice = createSlice({
   name: 'ideas',
   initialState: {
+    currentIdeaUuid: null,
     ideas: { 'unsorted': [] }, // {worldUuid: [ideaUuid]}
     ideasData: {} // {ideaUuid: {uuid: string, name: string, content: object }}
   },
   reducers: {
+    setCurrentIdeaUuid: (state, action) => {
+      const { ideaUuid } = action.payload
+      state.currentIdeaUuid = ideaUuid
+    },
     changeContent: (state, action) => {
-      
       const { uuid, content } = action.payload
       state.ideasData[uuid].content = content
     },
@@ -34,7 +38,7 @@ const ideasSlice = createSlice({
   }
 })
 
-export const { createIdea, changeContent, changeName } = ideasSlice.actions
+export const { createIdea, changeContent, changeName, setCurrentIdeaUuid } = ideasSlice.actions
 export const { reducer } = ideasSlice
 
 

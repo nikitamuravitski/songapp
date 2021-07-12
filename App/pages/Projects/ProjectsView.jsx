@@ -6,7 +6,6 @@ import { Paper } from '../../components/Paper'
 export const ProjectsView = ({ recent, pressHandler }) => {
   let projectsData = useSelector(state => state.Projects.projectsData)
   projectsData = Array.from(Object.values(projectsData))
-  console.log(projectsData)
   let recentProjectsData = projectsData.slice(0, 3)
   if (recent) {
     return <View>
@@ -16,6 +15,7 @@ export const ProjectsView = ({ recent, pressHandler }) => {
         keyExtractor={(item) => item.projectUuid}
         renderItem={({ item }) => {
           return <Paper
+            worldUuid={item.worldUuid}
             uuid={item.projectUuid}
             key={item.projectUuid}
             name={item.name}
@@ -32,6 +32,7 @@ export const ProjectsView = ({ recent, pressHandler }) => {
         data={projectsData}
         keyExtractor={(item) => item.projectUuid}
         renderItem={({ item }) => <Paper
+          worldUuid={item.worldUuid}
           uuid={item.projectUuid}
           key={item.projectUuid}
           name={item.name}
