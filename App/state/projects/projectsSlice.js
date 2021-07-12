@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
 const projectsSlice = createSlice({
   name: 'projects',
@@ -6,43 +6,43 @@ const projectsSlice = createSlice({
     currentProjectUuid: null,
     projects: ['papa'], // ['projectuuid', ...]
     projectsData: {
-      'papa': {
+      papa: {
         projectUuid: 'papa',
         worldUuid: 'unsorted',
         name: 'papa',
         sectionsOrder: ['section6', 'section2', 'section3', 'section4', 'section5', 'section1'],
         sections: {
-          'section1': {
+          section1: {
             sectionUuid: 'section1',
             type: 'TEXT',
             name: 'Papa has',
             content: 'May be me msl of;dsk og'
           },
-          'section2': {
+          section2: {
             sectionUuid: 'section2',
             type: 'TEXT',
             name: 'Papa has',
             content: 'May be me msl of;dsk og'
           },
-          'section3': {
+          section3: {
             sectionUuid: 'section3',
             type: 'TEXT',
             name: 'Papa has',
             content: 'May be me msl of;dsk og'
           },
-          'section4': {
+          section4: {
             sectionUuid: 'section4',
             type: 'TEXT',
             name: 'Papa has',
             content: 'May be me msl of;dsk og'
           },
-          'section5': {
+          section5: {
             sectionUuid: 'section5',
             type: 'TEXT',
             name: 'Papa has',
             content: 'May be me msl of;dsk og'
           },
-          'section6': {
+          section6: {
             sectionUuid: 'section6',
             type: 'TEXT',
             name: 'Papa has',
@@ -105,5 +105,3 @@ const projectsSlice = createSlice({
 
 export const { createProject, changeSectionContent, changeSectionName, addSection, setCurrentProjectUuid } = projectsSlice.actions
 export const { reducer } = projectsSlice
-
-

@@ -1,8 +1,6 @@
-import React from 'react';
-import { Tabs } from './routes/Tabs'
+import React from 'react'
 import { StackNavigator } from './routes/Stack'
 
-
-export default function App() {
+export default function App () {
   return <StackNavigator />
 }

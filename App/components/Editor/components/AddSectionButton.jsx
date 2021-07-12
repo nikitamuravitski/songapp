@@ -1,20 +1,21 @@
 import React from 'react'
-import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Image, TouchableOpacity } from 'react-native'
 import uuid from 'react-native-uuid'
 import { useDispatch } from 'react-redux'
 import { addSection } from '../../../state/projects'
 
 export const AddSectionButton = ({ index, projectUuid }) => {
-
   const dispatch = useDispatch()
   const newSectionUuid = `section.${uuid.v4()}`
 
-  return <TouchableOpacity
-    style={styles.container}
-    onPress={() => dispatch(addSection({ index, newSectionUuid: newSectionUuid, projectUuid }))}
-  >
-    <Image source={require('../../../assets/add.png')} style={{ width: 14, height: 14 }} />
-  </TouchableOpacity>
+  return (
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => dispatch(addSection({ index, newSectionUuid: newSectionUuid, projectUuid }))}
+    >
+      <Image source={require('../../../assets/add.png')} style={{ width: 14, height: 14 }} />
+    </TouchableOpacity>
+  )
 }
 const styles = StyleSheet.create({
   container: {
@@ -32,14 +33,14 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
 
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 2
     },
     shadowOpacity: 0.22,
     shadowRadius: 3.22,
     zIndex: -1,
-    elevation: 0,
+    elevation: 0
   }
 })

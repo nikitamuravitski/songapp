@@ -2,5 +2,5 @@ import React from 'react'
 import { PaperView } from './PaperView'
 
 export const PaperContainer = (props) => {
-    return <PaperView {...props} />
+  return <PaperView {...props} />
 }

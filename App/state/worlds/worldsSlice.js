@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
 const worldsSlice = createSlice({
   name: 'worlds',
@@ -6,7 +6,7 @@ const worldsSlice = createSlice({
     currentWorldUuid: null,
     worlds: ['unsorted'], // ['worldUuid', ...]
     worldsData: {
-      'unsorted': {
+      unsorted: {
         uuid: 'unsorted',
         name: 'Unsorted',
         ideas: []
@@ -41,11 +41,9 @@ const worldsSlice = createSlice({
     remove: (state, action) => {
       const { uuid } = action.payload
       state.worlds = state.ideas.filter(worldUuid => worldUuid !== uuid)
-
     }
   }
 })
 
 export const { createWorld, changeName, addIdeaToWorld, setCurrentWorldUuid, remove } = worldsSlice.actions
 export const { reducer } = worldsSlice
-

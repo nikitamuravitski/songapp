@@ -1,13 +1,13 @@
 import React from 'react'
 import { ProjectsView } from './ProjectsView'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native'
 import { getProjectsData, setCurrentProjectUuid } from '../../state/projects'
 import { setCurrentWorldUuid } from '../../state/worlds'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'
 
 export const ProjectsContainer = (props) => {
   const dispatch = useDispatch()
-  const navigation = useNavigation();
+  const navigation = useNavigation()
   let data = useSelector(getProjectsData)
   data = Object.values(data)
   const pressHandler = (params) => {

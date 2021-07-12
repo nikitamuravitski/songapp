@@ -1,10 +1,10 @@
-import { createSelector, createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
 const ideasSlice = createSlice({
   name: 'ideas',
   initialState: {
     currentIdeaUuid: null,
-    ideas: { 'unsorted': [] }, // {worldUuid: [ideaUuid]}
+    ideas: { unsorted: [] }, // {worldUuid: [ideaUuid]}
     ideasData: {} // {ideaUuid: {uuid: string, name: string, content: object }}
   },
   reducers: {
@@ -40,6 +40,3 @@ const ideasSlice = createSlice({
 
 export const { createIdea, changeContent, changeName, setCurrentIdeaUuid } = ideasSlice.actions
 export const { reducer } = ideasSlice
-
-
-

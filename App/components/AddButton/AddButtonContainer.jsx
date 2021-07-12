@@ -1,6 +1,6 @@
 import React from 'react'
 import { AddButtonView } from './AddButtonView'
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native'
 import { createIdea, setCurrentIdeaUuid } from '../../state/ideas'
 import { createProject, setCurrentProjectUuid } from '../../state/projects'
 import { addIdeaToWorld, createWorld, setCurrentWorldUuid } from '../../state/worlds'
@@ -11,14 +11,14 @@ import uuid from 'react-native-uuid'
 export const AddButtonContainer = (props) => {
   const dispatch = useDispatch()
   const navigation = useNavigation()
-  const route = useRoute()
+
   const projectData = useSelector(state => state.Projects.projectsData)
   let pressHandler
   if (props.buttonTitle === 'Add Idea') {
     pressHandler = () => {
       const ideaUuid = `idea.${uuid.v4()}`
       if (props.projectUuid) {
-        let worldUuid = projectData[props.projectUuid].worldUuid
+        const worldUuid = projectData[props.projectUuid].worldUuid
         dispatch(setCurrentIdeaUuid({ ideaUuid: ideaUuid }))
         dispatch(createIdea({ uuid: ideaUuid, worldUuid: worldUuid }))
         dispatch(addIdeaToWorld({ ideaUuid: ideaUuid, worldUuid: worldUuid }))

@@ -22,7 +22,7 @@ export const EditorContainer = (props) => {
     hasName = false
   }
   if (route.params.type === 'PROJECT') {
-    let temp = []
+    const temp = []
     data = useSelector(getCurrentProject)
     if (data.sectionsOrder) {
       data.sectionsOrder.forEach(uuid => {
@@ -40,13 +40,15 @@ export const EditorContainer = (props) => {
     }
     hasName = true
   }
-  return <EditorView
-    type={route.params.type}
-    hasName={hasName}
-    data={data}
-    projectUuid={route.params.uuid}
-    changeContentHandler={changeContentHandler}
-    changeSectionNameHandler={changeSectionNameHandler}
-    {...props}
-  />
+  return (
+    <EditorView
+      type={route.params.type}
+      hasName={hasName}
+      data={data}
+      projectUuid={route.params.uuid}
+      changeContentHandler={changeContentHandler}
+      changeSectionNameHandler={changeSectionNameHandler}
+      {...props}
+    />
+  )
 }
