@@ -10,7 +10,7 @@ export const PaperView = ({
   pressHandler
 }) => {
   return (
-    <TouchableOpacity onPress={() => pressHandler({ worldUuid, name, uuid, type })} style={styles.container}>
+    <TouchableOpacity onPress={() => pressHandler(uuid)} style={styles.container}>
       <View>
         <View>
           {name ? <Text style={styles.name}>{name}</Text> : null}

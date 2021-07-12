@@ -18,7 +18,7 @@ export const EditorView = ({
       <View>
         <FlatList
           data={data}
-        // ItemSeparatorComponent={() => }
+          // ItemSeparatorComponent={() => }
           keyExtractor={item => item.sectionUuid}
           renderItem={({ item, index }) => {
             return (
@@ -36,10 +36,8 @@ export const EditorView = ({
                   onChangeText={(text) => {
                     changeContentHandler(item.sectionUuid, text)
                   }}
-                >
-                  {/* So this workaround is working */}
-                  <Text>{item.content}</Text>
-                </TextInput>
+                  value={item.content}
+                />
                 <AddSectionButton index={index} projectUuid={projectUuid} />
               </View>
             )

@@ -1,15 +1,17 @@
 import React from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
 import { Ideas } from '../Ideas'
-import { Projects } from '../Projects'
+import RecentList from '../Projects/containers/List'
+
 export const HomeView = () => {
   return (
     <ScrollView style={styles.container}>
-      <Projects recent />
-      <Ideas recent />
+      <RecentList recent />
+      {/* <Ideas recent /> */}
     </ScrollView>
   )
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1

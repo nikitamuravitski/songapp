@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useRoute } from '@react-navigation/native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { Home } from '../pages/Home'
-import { Projects } from '../pages/Projects'
+import ProjectsList from '../pages/Projects/containers/List'
 import { Worlds } from '../pages/Worlds'
 import { Ideas } from '../pages/Ideas'
 import { Finished } from '../pages/Finished'
@@ -28,7 +28,7 @@ export const Tabs = () => {
   const [selectedGroupValue, setSelectedGroupValue] = useState({
     firstGroup: {
       name: 'Projects',
-      component: Projects
+      component: ProjectsList
     },
     secondGroup: {
       name: 'Ideas',
@@ -73,7 +73,7 @@ export const Tabs = () => {
                   ...selectedGroupValue,
                   firstGroup: {
                     name: 'Projects',
-                    component: Projects
+                    component: ProjectsList
                   }
                 })
               }

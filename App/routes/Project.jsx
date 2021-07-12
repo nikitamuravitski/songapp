@@ -11,9 +11,9 @@ export const Project = ({ route }) => {
     <>
       <Tab.Navigator>
         <Tab.Screen name='Project Page' component={Editor} />
-        <Tab.Screen name='World of Project' component={Worlds} />
+        {/* <Tab.Screen name='World of Project' component={Worlds} /> */}
       </Tab.Navigator>
-      <AddButton buttonTitle='Add Idea' projectUuid={route.params.params.uuid} />
+      {/* <AddButton buttonTitle='Add Idea' projectUuid={route.params.params.uuid} /> */}
     </>
   )
 }
