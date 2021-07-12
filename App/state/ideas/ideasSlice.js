@@ -9,8 +9,7 @@ const ideasSlice = createSlice({
   },
   reducers: {
     setCurrentIdeaUuid: (state, action) => {
-      const { ideaUuid } = action.payload
-      state.currentIdeaUuid = ideaUuid
+      state.currentIdeaUuid = action.payload
     },
     changeContent: (state, action) => {
       const { uuid, content } = action.payload
