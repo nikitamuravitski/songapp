@@ -6,7 +6,6 @@ export const PaperView = ({
   uuid,
   content,
   name,
-  type,
   pressHandler
 }) => {
   return (

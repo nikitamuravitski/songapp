@@ -14,7 +14,6 @@ export default ({ recent }) => {
 
   const pressHandler = projectUuid => {
     const project = projects[projectUuid]
-    console.log(projectUuid)
     dispatch(setCurrentProjectUuid(projectUuid))
     dispatch(setCurrentWorldUuid(project.worldUuid))
 
@@ -23,6 +22,9 @@ export default ({ recent }) => {
 
   return (
     <ListView
+      name={recent
+        ? 'Recent Projects'
+        : null}
       projects={recent
         ? Object.values(projects)
         : Object.values(projects).slice(0, 3)}

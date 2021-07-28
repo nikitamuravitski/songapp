@@ -1,10 +1,10 @@
 import React from 'react'
-import { Text, FlatList, View } from 'react-native'
-import { Paper } from '../../components/Paper'
-export const RecentIdeasView = ({ data, pressHandler }) => {
+import { View, FlatList } from 'react-native'
+import { Paper } from '../../../components/Paper'
+
+export default ({ pressHandler, data }) => {
   return (
     <View>
-      <Text>Recent Ideas</Text>
       <FlatList
         data={data}
         keyExtractor={(item) => item.uuid}
@@ -15,7 +15,7 @@ export const RecentIdeasView = ({ data, pressHandler }) => {
           content={item.content}
           type='IDEA'
           pressHandler={pressHandler}
-                                  />}
+        />}
       />
     </View>
   )

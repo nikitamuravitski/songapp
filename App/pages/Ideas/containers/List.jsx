@@ -1,11 +1,11 @@
 import React from 'react'
-import { IdeasView } from './IdeasView'
+import IdeasView from '../components/List'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
-import { getIdeasData, setCurrentIdeaUuid } from '../../state/ideas'
-import { RecentIdeasView } from './RecentIdeasView'
+import { getIdeasData, setCurrentIdeaUuid } from '../../../state/ideas'
+import RecentIdeasView from '../components/Recent'
 
-export const IdeasContainer = ({ recent }) => {
+export default ({ recent }) => {
   const dispatch = useDispatch()
   const navigation = useNavigation()
   let data = useSelector(getIdeasData)

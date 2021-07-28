@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useRoute } from '@react-navigation/native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { Home } from '../pages/Home'
+import Home from '../pages/Home/containers/Home'
 import ProjectsList from '../pages/Projects/containers/List'
-import { Worlds } from '../pages/Worlds'
-import { Ideas } from '../pages/Ideas'
+import Worlds from '../pages/Worlds/containers/Worlds'
+import Ideas from '../pages/Ideas/containers/List'
 import { Finished } from '../pages/Finished'
 import { AddButton } from '../components/AddButton'
 

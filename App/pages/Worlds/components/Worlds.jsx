@@ -2,16 +2,19 @@ import React, { useEffect } from 'react'
 
 import { View, Text, FlatList } from 'react-native'
 import { useDispatch } from 'react-redux'
-import { Ideas } from '../Ideas'
-import { setCurrentWorldUuid } from '../../state/worlds'
+import Ideas from '../../Ideas/containers/List'
+import { setCurrentWorldUuid } from '../../../state/worlds'
 
-export const WorldsView = ({ data }) => {
-  data = Object.values(data)
+export default ({ data }) => {
   console.log(data)
+  data = Object.values(data)
   const dispatch = useDispatch()
-  useEffect(() => () => {
-    dispatch(setCurrentWorldUuid(null))
-  }, [])
+
+  // useEffect(() => () => dispatch(setCurrentWorldUuid(null))
+  //   , []) 
+
+  //**** for some reason it rewrites currentWorldUuid earlier than selector picks it up ****//
+
   return (
     <View>
       <FlatList
