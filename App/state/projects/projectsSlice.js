@@ -16,19 +16,37 @@ const projectsSlice = createSlice({
             sectionUuid: 'section1',
             type: 'TEXT',
             name: 'Papa has',
-            content: 'May be me msl of;dsk og'
+            currentVersion: 'version3',
+            versions: {
+              'version3': {
+                versionUuid: 'version3',
+                content: 'mamamam ds badum'
+              }
+            }
           },
           section2: {
             sectionUuid: 'section2',
             type: 'TEXT',
             name: 'Papa has',
-            content: 'May be me msl of;dsk og'
+            currentVersion: 'version2',
+            versions: {
+              'version2': {
+                versionUuid: 'version2',
+                content: 'paparapa badumdadam'
+              }
+            }
           },
           section3: {
             sectionUuid: 'section3',
             type: 'TEXT',
             name: 'Papa has',
-            content: 'May be me msl of;dsk og'
+            currentVersion: 'version1',
+            versions: {
+              'version1': {
+                versionUuid: 'version1',
+                content: 'paparapa badum'
+              }
+            }
           }
         }
       }

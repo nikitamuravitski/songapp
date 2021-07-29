@@ -1,8 +1,7 @@
 import React from 'react'
 
-import { FlatList, View, StyleSheet, TextInput } from 'react-native'
+import { FlatList, StyleSheet } from 'react-native'
 
-import AddSectionButton from './AddSectionButton'
 import Section from './Section'
 
 export default ({
@@ -11,22 +10,19 @@ export default ({
   sectionList,
   addButtonPressHandler
 }) => {
-  return <View>
-    <FlatList
-      data={sectionList}
-      keyExtractor={item => item.sectionUuid}
-      renderItem={({ item, index }) => (
-        < Section
-          index={index}
-          data={item}
-          changeSectionNameHandler={changeSectionNameHandler}
-          changeContentHandler={changeContentHandler}
-          addButtonPressHandler={addButtonPressHandler}
-        />
-      )
-      }
-    />
-  </View >
+  return <FlatList
+    data={sectionList}
+    keyExtractor={item => item.sectionUuid}
+    renderItem={({ item, index }) => (
+      <Section
+        index={index}
+        data={item}
+        changeSectionNameHandler={changeSectionNameHandler}
+        changeContentHandler={changeContentHandler}
+        addButtonPressHandler={addButtonPressHandler}
+      />
+    )}
+  />
 }
 
 const styles = StyleSheet.create({

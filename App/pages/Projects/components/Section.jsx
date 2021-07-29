@@ -12,28 +12,36 @@ export default ({
   addButtonPressHandler
 }) => {
   const sectionUuid = data.sectionUuid
-  const versionsList = Object.values(data.versions).map(version => <TextInput
-    multiline
-    placeholder='What are you thinking?'
-    style={styles.editor}
-    onChangeText={text => { console.log(version); changeContentHandler(sectionUuid, version.versionUuid, text) }}
-    value={version.content}
-  />)
-  return <View style={styles.container}>
-    <TextInput
-      value={data.name}
-      onChangeText={text => changeSectionNameHandler(data.sectionUuid, text)}
-    />
-    <ScrollView horizontal style={styles.scroll} >
+  const versionsList = Object.values(data.versions).map(version => (
+    <View style={styles.container}>
+      <TextInput
+        value={data.name}
+        onChangeText={text => changeSectionNameHandler(data.sectionUuid, text)}
+      />
+      <TextInput
+        multiline
+        placeholder='What are you thinking?'
+        style={styles.editor}
+        onChangeText={text => { console.log(version); changeContentHandler(sectionUuid, version.versionUuid, text) }}
+        value={version.content}
+      />
+      <AddSectionButton index={index} addButtonPressHandler={addButtonPressHandler} />
+    </View>
+  )
+  )
+  return (
+    <ScrollView horizontal style={styles.wrapper}>
       {versionsList}
     </ScrollView>
-
-    <AddSectionButton index={index} addButtonPressHandler={addButtonPressHandler} />
-  </View>
+  )
 }
 
 const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1
+  },
   container: {
+    flex: 1,
     position: 'relative',
     backgroundColor: '#ffffff',
     borderRadius: 4,
@@ -50,11 +58,6 @@ const styles = StyleSheet.create({
     margin: 10,
     marginBottom: 24
   },
-  scroll: {
-    position: 'relative',
-    display: 'flex',
-    flex: 1
-  },
   editor: {
     alignSelf: 'stretch',
     padding: 10,
@@ -62,6 +65,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 8,
     fontSize: 16,
-    lineHeight: 23
+    // lineHeight: 23
   }
 })

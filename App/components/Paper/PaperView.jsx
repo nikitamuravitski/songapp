@@ -2,7 +2,6 @@ import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 export const PaperView = ({
-  worldUuid,
   uuid,
   content,
   name,
@@ -10,14 +9,8 @@ export const PaperView = ({
 }) => {
   return (
     <TouchableOpacity onPress={() => pressHandler(uuid)} style={styles.container}>
-      <View>
-        <View>
-          {name ? <Text style={styles.name}>{name}</Text> : null}
-        </View>
-        <View>
-          {content ? <Text style={styles.content}>{content}</Text> : null}
-        </View>
-      </View>
+      <Text style={styles.name}>{name}</Text>
+      <Text style={styles.content}>{content}</Text>
     </TouchableOpacity>
   )
 }

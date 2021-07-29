@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { getIdeasData, setCurrentIdeaUuid } from '../../../state/ideas'
 import RecentIdeasView from '../components/Recent'
+import { Text } from 'react-native'
 
 export default ({ recent }) => {
   const dispatch = useDispatch()

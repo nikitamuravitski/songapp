@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react'
 
 import { View, Text, FlatList } from 'react-native'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Ideas from '../../Ideas/containers/List'
 import { setCurrentWorldUuid } from '../../../state/worlds'
+import { getIdeasList } from '../../../state/ideas'
 
 export default ({ data }) => {
-  console.log(data)
-  data = Object.values(data)
   const dispatch = useDispatch()
+  // useEffect(() => {
+  //   return dispatch(setCurrentWorldUuid(null))
+  // }, [])
 
-  // useEffect(() => () => dispatch(setCurrentWorldUuid(null))
-  //   , []) 
 
   //**** for some reason it rewrites currentWorldUuid earlier than selector picks it up ****//
 
@@ -23,7 +23,8 @@ export default ({ data }) => {
         renderItem={({ item }) => (
           <View>
             <Text>{item.name}</Text>
-            <Ideas data={item} /> {/* here i need to pass smth to Ideas to show Ideas of Particular Worlds */}
+            <Ideas data={item.ideas} />
+            {/* here i need to pass smth to Ideas to show Ideas of Particular Worlds */}
           </View>
         )}
       />
