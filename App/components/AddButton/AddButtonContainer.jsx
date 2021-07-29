@@ -35,9 +35,10 @@ export const AddButtonContainer = (props) => {
       const projectUuid = `project.${uuid.v4()}`
       const worldUuid = `world.${uuid.v4()}`
       const sectionUuid = `section.${uuid.v4()}`
+      const versionUuid = `version.${uuid.v4()}`
       const projectName = 'New Project'
       dispatch(setCurrentProjectUuid(projectUuid))
-      dispatch(createProject({ projectUuid: projectUuid, worldUuid: worldUuid, name: 'New Project', sectionUuid: sectionUuid }))
+      dispatch(createProject({ projectUuid, worldUuid, name: 'New Project', sectionUuid, versionUuid }))
       dispatch(setCurrentWorldUuid(worldUuid))
       dispatch(createWorld({ uuid: worldUuid, name: `World for ${projectName}` }))
       navigation.navigate('Project', {

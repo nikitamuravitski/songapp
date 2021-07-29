@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeSectionContent, changeSectionName, getCurrentProject, addSection } from '../../../state/projects'
+import { changeVersionContent, changeSectionName, getCurrentProject, addSection } from '../../../state/projects'
 import uuid from 'react-native-uuid'
 import EditorView from '../components/Editor'
 
@@ -11,9 +11,10 @@ export default () => {
   const projectUuid = project.projectUuid
   const sectionList = project.sectionsOrder.map(uuid => project.sections[uuid])
 
-  const changeContentHandler = (sectionUuid, content) => dispatch(changeSectionContent({
+  const changeContentHandler = (sectionUuid, versionUuid, content) => dispatch(changeVersionContent({
     projectUuid,
     sectionUuid,
+    versionUuid,
     content
   }))
 
@@ -26,6 +27,7 @@ export default () => {
   const addButtonPressHandler = index => dispatch(addSection({
     index,
     newSectionUuid: `section.${uuid.v4()}`,
+    versionUuid: `version.${uuid.v4()}`,
     projectUuid
   }))
 

@@ -3,39 +3,31 @@ import React from 'react'
 import { FlatList, View, StyleSheet, TextInput } from 'react-native'
 
 import AddSectionButton from './AddSectionButton'
+import Section from './Section'
 
 export default ({
   changeContentHandler,
   changeSectionNameHandler,
   sectionList,
   addButtonPressHandler
-}) => (
-  <View>
+}) => {
+  return <View>
     <FlatList
       data={sectionList}
       keyExtractor={item => item.sectionUuid}
       renderItem={({ item, index }) => (
-        <View style={styles.container}>
-          <TextInput
-            value={item.name}
-            onChangeText={text => changeSectionNameHandler(item.sectionUuid, text)}
-          />
-          <TextInput
-            multiline
-            placeholder='What are you thinking?'
-            style={styles.editor}
-            onChangeText={text => changeContentHandler(item.sectionUuid, text)}
-            value={item.content}
-          />
-          <AddSectionButton
-            index={index}
-            addButtonPressHandler={addButtonPressHandler}
-          />
-        </View>
-      )}
+        < Section
+          index={index}
+          data={item}
+          changeSectionNameHandler={changeSectionNameHandler}
+          changeContentHandler={changeContentHandler}
+          addButtonPressHandler={addButtonPressHandler}
+        />
+      )
+      }
     />
-  </View>
-)
+  </View >
+}
 
 const styles = StyleSheet.create({
   name: {

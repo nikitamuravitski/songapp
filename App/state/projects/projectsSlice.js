@@ -10,7 +10,7 @@ const projectsSlice = createSlice({
         projectUuid: 'papa',
         worldUuid: 'unsorted',
         name: 'papa',
-        sectionsOrder: ['section6', 'section2', 'section3', 'section4', 'section5', 'section1'],
+        sectionsOrder: ['section1', 'section2', 'section3'],
         sections: {
           section1: {
             sectionUuid: 'section1',
@@ -29,48 +29,37 @@ const projectsSlice = createSlice({
             type: 'TEXT',
             name: 'Papa has',
             content: 'May be me msl of;dsk og'
-          },
-          section4: {
-            sectionUuid: 'section4',
-            type: 'TEXT',
-            name: 'Papa has',
-            content: 'May be me msl of;dsk og'
-          },
-          section5: {
-            sectionUuid: 'section5',
-            type: 'TEXT',
-            name: 'Papa has',
-            content: 'May be me msl of;dsk og'
-          },
-          section6: {
-            sectionUuid: 'section6',
-            type: 'TEXT',
-            name: 'Papa has',
-            content: 'May be me msl of;dsk og'
           }
         }
       }
-    } // {projectUuid: {uuid: string, name: string, content: object }}
+    }
   },
   reducers: {
     setCurrentProjectUuid: (state, action) => {
       state.currentProjectUuid = action.payload
     },
-    changeSectionContent: (state, action) => {
-      const { projectUuid, sectionUuid, content } = action.payload
-      state.projectsData[projectUuid].sections[sectionUuid].content = content
+    changeVersionContent: (state, action) => {
+      const { projectUuid, sectionUuid, versionUuid, content } = action.payload
+      console.log(action.payload)
+      state.projectsData[projectUuid].sections[sectionUuid].versions[versionUuid].content = content
     },
     changeSectionName: (state, action) => {
       const { projectUuid, sectionUuid, name } = action.payload
       state.projectsData[projectUuid].sections[sectionUuid].name = name
     },
     createProject: (state, action) => {
-      const { projectUuid, worldUuid, name, sectionUuid } = action.payload
+      const { projectUuid, worldUuid, name, sectionUuid, versionUuid } = action.payload
       const newSection = {
         sectionUuid,
         type: 'TEXT',
         name: 'New section',
-        content: ''
+        currentVersion: versionUuid,
+        versions: {
+          [versionUuid]: {
+            versionUuid,
+            content: ''
+          }
+        }
       }
       const newProject = {
         projectUuid,
@@ -84,14 +73,25 @@ const projectsSlice = createSlice({
       state.projectsData[projectUuid].sections[sectionUuid] = newSection
       state.projectsData[projectUuid].sectionsOrder.push(sectionUuid)
     },
+    //
+    addVersion: (state, action) => {
+      const { sectionUuid, versionUuid } = action.payload
+    },
+    //
     addSection: (state, action) => {
-      const { index, newSectionUuid, projectUuid } = action.payload
+      const { index, newSectionUuid, projectUuid, versionUuid } = action.payload
       state.projectsData[projectUuid].sectionsOrder.splice(index + 1, 0, newSectionUuid)
       const newSection = {
         sectionUuid: newSectionUuid,
         type: 'TEXT',
         name: 'New section',
-        content: ''
+        currentVersion: versionUuid,
+        versions: {
+          [versionUuid]: {
+            versionUuid,
+            content: ''
+          }
+        }
       }
       state.projectsData[projectUuid].sections[newSectionUuid] = newSection
     }
@@ -102,5 +102,5 @@ const projectsSlice = createSlice({
   }
 })
 
-export const { createProject, changeSectionContent, changeSectionName, addSection, setCurrentProjectUuid } = projectsSlice.actions
+export const { createProject, changeVersionContent, changeSectionName, addSection, setCurrentProjectUuid } = projectsSlice.actions
 export const { reducer } = projectsSlice
