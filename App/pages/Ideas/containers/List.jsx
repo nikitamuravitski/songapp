@@ -2,23 +2,22 @@ import React from 'react'
 import IdeasView from '../components/List'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
-import { getIdeasData, setCurrentIdeaUuid } from '../../../state/ideas'
+import { setCurrentIdeaUuid, getIdeasList } from '../../../state/ideas'
 import RecentIdeasView from '../components/Recent'
-import { Text } from 'react-native'
 
-export default ({ recent }) => {
+
+export default ({ worldUuid, recent }) => {
   const dispatch = useDispatch()
   const navigation = useNavigation()
-  let data = useSelector(getIdeasData)
-  data = Object.values(data)
-
+  let ideasList = useSelector(getIdeasList(worldUuid)) // [idea3, idea4]
+  console.log(ideasList, worldUuid)
   const pressHandler = (params) => {
     navigation.push('Editor', { ...params })
     dispatch(setCurrentIdeaUuid(params.uuid))
   }
   if (recent) {
-    data = data.slice(0, 3)
-    return <RecentIdeasView data={data} pressHandler={pressHandler} />
+    // for now, needs to be properly reworked by date
+    return <RecentIdeasView data={ideasList} pressHandler={pressHandler} />
   }
-  return <IdeasView data={data} pressHandler={pressHandler} />
+  return <IdeasView data={ideasList} pressHandler={pressHandler} />
 }

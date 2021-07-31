@@ -7,6 +7,6 @@ export const getCurrentWorld = createSelector(
   getWorldsData,
   (currentWorldUuid, worldsData) => {
     if (currentWorldUuid === null) return null
-    return { [currentWorldUuid]: worldsData[currentWorldUuid] }
+    return worldsData[currentWorldUuid]
   }
 )

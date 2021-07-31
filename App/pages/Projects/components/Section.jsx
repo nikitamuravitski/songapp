@@ -22,7 +22,7 @@ export default ({
         multiline
         placeholder='What are you thinking?'
         style={styles.editor}
-        onChangeText={text => { console.log(version); changeContentHandler(sectionUuid, version.versionUuid, text) }}
+        onChangeText={text => changeContentHandler(sectionUuid, version.versionUuid, text)}
         value={version.content}
       />
       <AddSectionButton index={index} addButtonPressHandler={addButtonPressHandler} />

@@ -20,16 +20,10 @@ export default () => {
     name
   }))
 
-  const addButtonPressHandler = index => dispatch(addSection({
-    index,
-    newSectionUuid: `section.${uuid.v4()}`,
-    projectUuid
-  }))
 
   return (
     <EditorView
       idea={idea}
-      // addButtonPressHandler={addButtonPressHandler}
       changeContentHandler={changeContentHandler}
       changeNameHandler={changeNameHandler}
     />

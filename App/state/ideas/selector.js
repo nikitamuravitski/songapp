@@ -10,10 +10,11 @@ export const getCurrentIdea = createSelector(
     return ideasData[currentIdeaUuid]
   }
 )
-export const getIdeasList = ideasUuidArray => state => {
-  console.log(ideasUuidArray, state)
-  if (!ideasUuidArray.length) return null
-  const ideasList = ideasUuidArray.map(uuid => state.Ideas.ideasData[uuid])
+export const getIdeasList = worldUuid => state => {
+  if (!worldUuid) return null
+  const ideasUuidList = state.Ideas.ideas[worldUuid]
+  const ideasList = ideasUuidList.map(uuid => state.Ideas.ideasData[uuid])
+  console.log(ideasList)
   return ideasList
 }
 

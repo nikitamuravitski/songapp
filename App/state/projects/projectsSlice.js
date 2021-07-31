@@ -58,7 +58,6 @@ const projectsSlice = createSlice({
     },
     changeVersionContent: (state, action) => {
       const { projectUuid, sectionUuid, versionUuid, content } = action.payload
-      console.log(action.payload)
       state.projectsData[projectUuid].sections[sectionUuid].versions[versionUuid].content = content
     },
     changeSectionName: (state, action) => {

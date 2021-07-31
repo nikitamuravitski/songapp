@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { createIdea, setCurrentIdeaUuid } from '../../state/ideas'
 import { createProject, setCurrentProjectUuid } from '../../state/projects'
 import { addIdeaToWorld, createWorld, setCurrentWorldUuid } from '../../state/worlds'
+import { createWorldForIdeas } from '../../state/ideas'
 import { useDispatch, useSelector } from 'react-redux'
 import 'react-native-get-random-values'
 import uuid from 'react-native-uuid'
@@ -41,6 +42,7 @@ export const AddButtonContainer = (props) => {
       dispatch(createProject({ projectUuid, worldUuid, name: 'New Project', sectionUuid, versionUuid }))
       dispatch(setCurrentWorldUuid(worldUuid))
       dispatch(createWorld({ uuid: worldUuid, name: `World for ${projectName}` }))
+      dispatch(createWorldForIdeas(worldUuid))
       navigation.navigate('Project', {
         screen: 'Project Page',
         params: {

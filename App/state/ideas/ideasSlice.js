@@ -19,6 +19,9 @@ const ideasSlice = createSlice({
       const { uuid, name } = action.payload
       state.ideasData[uuid].name = name
     },
+    createWorldForIdeas: (state, action) => {
+      state.ideas[action.payload] = []
+    },
     createIdea: (state, action) => {
       const { uuid, worldUuid } = action.payload
       const newIdea = {
@@ -37,5 +40,5 @@ const ideasSlice = createSlice({
   }
 })
 
-export const { createIdea, changeContent, changeName, setCurrentIdeaUuid } = ideasSlice.actions
+export const { createIdea, changeContent, changeName, setCurrentIdeaUuid, createWorldForIdeas } = ideasSlice.actions
 export const { reducer } = ideasSlice
