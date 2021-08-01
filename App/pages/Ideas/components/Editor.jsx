@@ -41,13 +41,11 @@ export default ({
     return () => {
       changeContentHandler(contentRef.current)
       changeNameHandler(nameRef.current)
-      console.log(content.current, name.current)
       if (contentRef.current) {
-        console.log('if')
         dispatch(updateRecentIdeasList(ideaUuid))
       }
       else {
-        console.log('else')
+
         dispatch(removeIdea({ ideaUuid, worldUuid }))
         dispatch(removeIdeaFromWorld({ ideaUuid, worldUuid }))
       }
@@ -65,7 +63,7 @@ export default ({
         multiline
         placeholder='What are you thinking?'
         style={styles.editor}
-        onChangeText={text => { console.log(text); setContent(text) }}
+        onChangeText={text => setContent(text)}
         value={content}
       />
     </View>

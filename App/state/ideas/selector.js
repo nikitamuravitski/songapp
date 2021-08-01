@@ -14,7 +14,6 @@ export const getIdeasList = worldUuid => state => {
   if (!worldUuid) return null
   const ideasUuidList = state.Ideas.ideas[worldUuid]
   const ideasList = ideasUuidList.map(uuid => state.Ideas.ideasData[uuid])
-  console.log(ideasList)
   return ideasList
 }
 const getRecentIdeasUuids = state => state.Ideas.recentIdeasUuidList

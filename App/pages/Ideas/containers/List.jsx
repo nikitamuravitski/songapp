@@ -11,7 +11,6 @@ export default ({ worldUuid, recent }) => {
   const navigation = useNavigation()
   let ideasList = useSelector(getIdeasList(worldUuid)) // [idea3, idea4]
   let recentIdeasList = useSelector(getRecentIdeasList)
-  console.log(recentIdeasList)
   const pressHandler = (params) => {
     navigation.push('Editor', { ...params })
     dispatch(setCurrentIdeaUuid(params.uuid))
