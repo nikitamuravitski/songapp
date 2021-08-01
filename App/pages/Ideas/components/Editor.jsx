@@ -4,7 +4,14 @@ import { updateRecentIdeasList, removeIdea, setCurrentIdeaUuid } from '../../../
 import { removeIdeaFromWorld } from '../../../state/worlds'
 import { View, StyleSheet, TextInput } from 'react-native'
 import { useDispatch } from 'react-redux'
+import { useRef } from 'react'
 
+const useChangeContent = (text) => {
+  const [content, setContent] = useState('')
+  const contentRef = useRef('')
+  setContent(text)
+  contentRef.current = content
+}
 export default ({
   changeContentHandler,
   changeNameHandler,
@@ -14,19 +21,30 @@ export default ({
 }) => {
 
   const dispatch = useDispatch()
-  const [content, setContent] = useState('')
-  const [name, setName] = useState('')
+  const [content, setStateContent] = useState('')
+  const [name, setStateName] = useState('')
+  const nameRef = useRef('')
+  const contentRef = useRef('')
+  const setName = (text) => {
+    nameRef.current = text
+    setStateName(text)
+  }
+  const setContent = (text) => {
+    contentRef.current = text
+    setStateContent(text)
+  }
+
 
   useEffect(() => {
     setName(idea.name)
+    setContent(idea.content)
     return () => {
-
-      changeContentHandler(idea.uuid, content)
-      changeNameHandler(idea.uuid, name)
-      console.log(idea)
-      if (idea.content) {
+      changeContentHandler(contentRef.current)
+      changeNameHandler(nameRef.current)
+      console.log(content.current, name.current)
+      if (contentRef.current) {
         console.log('if')
-        dispatch(updateRecentIdeasList({ ideaUuid, worldUuid }))
+        dispatch(updateRecentIdeasList(ideaUuid))
       }
       else {
         console.log('else')

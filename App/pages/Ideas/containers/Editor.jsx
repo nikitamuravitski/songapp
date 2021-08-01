@@ -11,13 +11,13 @@ export default () => {
   const ideaUuid = idea.uuid
   const worldUuid = useSelector(getCurrentWorldUuid)
 
-  const changeContentHandler = (uuid, content) => dispatch(changeContent({
-    uuid,
+  const changeContentHandler = (content) => dispatch(changeContent({
+    uuid: ideaUuid,
     content
   }))
 
-  const changeNameHandler = (uuid, name) => dispatch(changeName({
-    uuid,
+  const changeNameHandler = (name) => dispatch(changeName({
+    uuid: ideaUuid,
     name
   }))
 

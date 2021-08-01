@@ -17,4 +17,12 @@ export const getIdeasList = worldUuid => state => {
   console.log(ideasList)
   return ideasList
 }
-
+const getRecentIdeasUuids = state => state.Ideas.recentIdeasUuidList
+export const getRecentIdeasList = createSelector(
+  getRecentIdeasUuids,
+  getIdeasData,
+  (recentIdeasUuidList, ideasData) => {
+    const recentIdeasList = recentIdeasUuidList.map(uuid => ideasData[uuid])
+    return recentIdeasList
+  }
+)
