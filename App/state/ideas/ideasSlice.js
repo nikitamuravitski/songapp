@@ -4,6 +4,7 @@ const ideasSlice = createSlice({
   name: 'ideas',
   initialState: {
     currentIdeaUuid: null,
+    recentIdeasUuidList: [], // [ideaUuid1, ideaUuid2, ideaUuid1]
     ideas: { unsorted: [] }, // {worldUuid: [ideaUuid]}
     ideasData: {} // {ideaUuid: {uuid: string, name: string, content: object }}
   },
@@ -33,12 +34,30 @@ const ideasSlice = createSlice({
       state.ideas[worldUuid].push(uuid)
       state.ideasData[uuid] = newIdea
     },
-    remove: (state, action) => {
-      const { uuid } = action.payload
-      state.ideas = state.ideas.filter(ideaUuid => ideaUuid !== uuid)
+    updateRecentIdeasList: (state, action) => {
+      const ideaUuid = action.payload
+      if (state.recentIdeasUuidList.length < 3) state.recentIdeasUuidList.push(ideaUuid)
+      else {
+        state.recentIdeasUuidList.unshift(ideaUuid)
+        state.recentIdeasUuidList.pop()
+      }
+    },
+    removeIdea: (state, action) => {
+      const { ideaUuid, worldUuid } = action.payload
+      state.ideas[worldUuid] = state.ideas[worldUuid].filter(uuid => uuid !== ideaUuid)
+      state.recentIdeasUuidList = state.recentIdeasUuidList.filter(uuid => uuid !== ideaUuid)
+      delete state.ideasData[ideaUuid]
     }
   }
 })
 
-export const { createIdea, changeContent, changeName, setCurrentIdeaUuid, createWorldForIdeas } = ideasSlice.actions
+export const {
+  createIdea,
+  changeContent,
+  changeName,
+  setCurrentIdeaUuid,
+  createWorldForIdeas,
+  updateRecentIdeasList,
+  removeIdea
+} = ideasSlice.actions
 export const { reducer } = ideasSlice

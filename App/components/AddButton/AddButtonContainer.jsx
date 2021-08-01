@@ -28,7 +28,7 @@ export const AddButtonContainer = (props) => {
         dispatch(createIdea({ uuid: ideaUuid, worldUuid: 'unsorted' }))
         dispatch(addIdeaToWorld({ ideaUuid: ideaUuid, worldUuid: 'unsorted' }))
       }
-      navigation.navigate('Editor', { name: 'New Idea', uuid: ideaUuid, type: 'IDEA' })
+      navigation.navigate('Idea Editor', { name: 'New Idea', uuid: ideaUuid, type: 'IDEA' })
     }
   }
   if (props.buttonTitle === 'Create Project') {

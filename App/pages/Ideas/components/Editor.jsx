@@ -1,28 +1,58 @@
 import React from 'react'
-
+import { useEffect, useState } from 'react'
+import { updateRecentIdeasList, removeIdea, setCurrentIdeaUuid } from '../../../state/ideas'
+import { removeIdeaFromWorld } from '../../../state/worlds'
 import { View, StyleSheet, TextInput } from 'react-native'
+import { useDispatch } from 'react-redux'
 
 export default ({
   changeContentHandler,
   changeNameHandler,
-  idea
-}) => (
-  <View>
+  idea,
+  ideaUuid,
+  worldUuid
+}) => {
+
+  const dispatch = useDispatch()
+  const [content, setContent] = useState('')
+  const [name, setName] = useState('')
+
+  useEffect(() => {
+    setName(idea.name)
+    return () => {
+
+      changeContentHandler(idea.uuid, content)
+      changeNameHandler(idea.uuid, name)
+      console.log(idea)
+      if (idea.content) {
+        console.log('if')
+        dispatch(updateRecentIdeasList({ ideaUuid, worldUuid }))
+      }
+      else {
+        console.log('else')
+        dispatch(removeIdea({ ideaUuid, worldUuid }))
+        dispatch(removeIdeaFromWorld({ ideaUuid, worldUuid }))
+      }
+      dispatch(setCurrentIdeaUuid(null))
+    }
+  }, [])
+
+  return <View>
     <View style={styles.container}>
       <TextInput
-        value={idea.name}
-        onChangeText={text => changeNameHandler(idea.uuid, text)}
+        value={name}
+        onChangeText={text => setName(text)}
       />
       <TextInput
         multiline
         placeholder='What are you thinking?'
         style={styles.editor}
-        onChangeText={text => changeContentHandler(idea.uuid, text)}
-        value={idea.content}
+        onChangeText={text => { console.log(text); setContent(text) }}
+        value={content}
       />
     </View>
   </View>
-)
+}
 
 const styles = StyleSheet.create({
   name: {

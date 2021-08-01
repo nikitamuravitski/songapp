@@ -1,14 +1,15 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeContent, changeName, getCurrentIdea } from '../../../state/ideas'
-import uuid from 'react-native-uuid'
+import { getCurrentWorldUuid } from '../../../state/worlds'
 import EditorView from '../components/Editor'
 
 export default () => {
   const dispatch = useDispatch()
 
   const idea = useSelector(getCurrentIdea)
-  const uuid = idea.uuid
+  const ideaUuid = idea.uuid
+  const worldUuid = useSelector(getCurrentWorldUuid)
 
   const changeContentHandler = (uuid, content) => dispatch(changeContent({
     uuid,
@@ -20,10 +21,11 @@ export default () => {
     name
   }))
 
-
   return (
     <EditorView
       idea={idea}
+      ideaUuid={ideaUuid}
+      worldUuid={worldUuid}
       changeContentHandler={changeContentHandler}
       changeNameHandler={changeNameHandler}
     />
