@@ -36,13 +36,20 @@ const worldsSlice = createSlice({
     addIdeaToWorld: (state, action) => {
       const { ideaUuid, worldUuid } = action.payload
       state.worldsData[worldUuid].ideas.push(ideaUuid)
+      state.currentWorldUuid = worldUuid
     },
-    remove: (state, action) => {
-      const { uuid } = action.payload
-      state.worlds = state.ideas.filter(worldUuid => worldUuid !== uuid)
+    removeIdeaFromWorld: (state, action) => {
+      const { worldUuid, ideaUuid } = action.payload
+      state.worldsData[worldUuid].ideas = state.worldsData[worldUuid].ideas.filter(uuid => uuid !== ideaUuid)
     }
   }
 })
 
-export const { createWorld, changeName, addIdeaToWorld, setCurrentWorldUuid, remove } = worldsSlice.actions
+export const {
+  createWorld,
+  changeName,
+  addIdeaToWorld,
+  setCurrentWorldUuid,
+  removeIdeaFromWorld
+} = worldsSlice.actions
 export const { reducer } = worldsSlice

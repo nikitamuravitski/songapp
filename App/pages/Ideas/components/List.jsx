@@ -3,6 +3,7 @@ import { View, FlatList } from 'react-native'
 import { Paper } from '../../../components/Paper'
 
 export default ({ pressHandler, data }) => {
+
   return (
     <View>
       <FlatList

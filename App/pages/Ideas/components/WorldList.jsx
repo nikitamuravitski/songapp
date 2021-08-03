@@ -4,7 +4,6 @@ import { Paper } from '../../../components/Paper'
 export default ({ data, pressHandler }) => {
   return (
     <View>
-      <Text />
       <FlatList
         data={data}
         keyExtractor={(item) => item.uuid}

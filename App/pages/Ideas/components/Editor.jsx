@@ -1,28 +1,73 @@
 import React from 'react'
-
+import { useEffect, useState } from 'react'
+import { updateRecentIdeasList, removeIdea, setCurrentIdeaUuid } from '../../../state/ideas'
+import { removeIdeaFromWorld } from '../../../state/worlds'
 import { View, StyleSheet, TextInput } from 'react-native'
+import { useDispatch } from 'react-redux'
+import { useRef } from 'react'
 
+const useChangeContent = (text) => {
+  const [content, setContent] = useState('')
+  const contentRef = useRef('')
+  setContent(text)
+  contentRef.current = content
+}
 export default ({
-  changeContentHandler,
-  changeNameHandler,
-  idea
-}) => (
-  <View>
+  changeContentGlobalState,
+  changeNameGlobalState,
+  idea,
+  ideaUuid,
+  worldUuid
+}) => {
+
+  const dispatch = useDispatch()
+  const [content, setStateContent] = useState(idea.content)
+  const [name, setStateName] = useState(idea.name)
+  const nameRef = useRef(idea.name)
+  const contentRef = useRef(idea.content)
+  const setName = (text) => {
+    nameRef.current = text
+    setStateName(text)
+  }
+  const setContent = (text) => {
+    contentRef.current = text
+    setStateContent(text)
+  }
+
+
+  useEffect(() => {
+
+    return () => {
+      changeContentGlobalState(contentRef.current)
+      changeNameGlobalState(nameRef.current)
+      if (contentRef.current) {
+        dispatch(updateRecentIdeasList(ideaUuid))
+      }
+      else {
+
+        dispatch(removeIdea({ ideaUuid, worldUuid }))
+        dispatch(removeIdeaFromWorld({ ideaUuid, worldUuid }))
+      }
+      dispatch(setCurrentIdeaUuid(null))
+    }
+  }, [])
+
+  return <View>
     <View style={styles.container}>
       <TextInput
-        value={idea.name}
-        onChangeText={text => changeNameHandler(idea.uuid, text)}
+        value={name}
+        onChangeText={text => setName(text)}
       />
       <TextInput
         multiline
         placeholder='What are you thinking?'
         style={styles.editor}
-        onChangeText={text => changeContentHandler(idea.uuid, text)}
-        value={idea.content}
+        onChangeText={text => setContent(text)}
+        value={content}
       />
     </View>
   </View>
-)
+}
 
 const styles = StyleSheet.create({
   name: {

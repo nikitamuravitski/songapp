@@ -1,37 +1,33 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeContent, changeName, getCurrentIdea } from '../../../state/ideas'
-import uuid from 'react-native-uuid'
+import { getCurrentWorldUuid } from '../../../state/worlds'
 import EditorView from '../components/Editor'
 
 export default () => {
   const dispatch = useDispatch()
 
   const idea = useSelector(getCurrentIdea)
-  const uuid = idea.uuid
+  const ideaUuid = idea.uuid
+  const worldUuid = useSelector(getCurrentWorldUuid)
 
-  const changeContentHandler = (uuid, content) => dispatch(changeContent({
-    uuid,
+  const changeContentGlobalState = (content) => dispatch(changeContent({
+    uuid: ideaUuid,
     content
   }))
 
-  const changeNameHandler = (uuid, name) => dispatch(changeName({
-    uuid,
+  const changeNameGlobalState = (name) => dispatch(changeName({
+    uuid: ideaUuid,
     name
-  }))
-
-  const addButtonPressHandler = index => dispatch(addSection({
-    index,
-    newSectionUuid: `section.${uuid.v4()}`,
-    projectUuid
   }))
 
   return (
     <EditorView
       idea={idea}
-      // addButtonPressHandler={addButtonPressHandler}
-      changeContentHandler={changeContentHandler}
-      changeNameHandler={changeNameHandler}
+      ideaUuid={ideaUuid}
+      worldUuid={worldUuid}
+      changeContentGlobalState={changeContentGlobalState}
+      changeNameGlobalState={changeNameGlobalState}
     />
   )
 }
