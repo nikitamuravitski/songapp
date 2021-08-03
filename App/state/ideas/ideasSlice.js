@@ -36,11 +36,8 @@ const ideasSlice = createSlice({
     },
     updateRecentIdeasList: (state, action) => {
       const ideaUuid = action.payload
-      if (state.recentIdeasUuidList.length < 3) state.recentIdeasUuidList.push(ideaUuid)
-      else {
-        state.recentIdeasUuidList.unshift(ideaUuid)
-        state.recentIdeasUuidList.pop()
-      }
+      state.recentIdeasUuidList.unshift(ideaUuid)
+      if (state.recentIdeasUuidList.length >= 3) state.recentIdeasUuidList.pop()
     },
     removeIdea: (state, action) => {
       const { ideaUuid, worldUuid } = action.payload

@@ -13,18 +13,18 @@ const useChangeContent = (text) => {
   contentRef.current = content
 }
 export default ({
-  changeContentHandler,
-  changeNameHandler,
+  changeContentGlobalState,
+  changeNameGlobalState,
   idea,
   ideaUuid,
   worldUuid
 }) => {
 
   const dispatch = useDispatch()
-  const [content, setStateContent] = useState('')
-  const [name, setStateName] = useState('')
-  const nameRef = useRef('')
-  const contentRef = useRef('')
+  const [content, setStateContent] = useState(idea.content)
+  const [name, setStateName] = useState(idea.name)
+  const nameRef = useRef(idea.name)
+  const contentRef = useRef(idea.content)
   const setName = (text) => {
     nameRef.current = text
     setStateName(text)
@@ -36,11 +36,10 @@ export default ({
 
 
   useEffect(() => {
-    setName(idea.name)
-    setContent(idea.content)
+
     return () => {
-      changeContentHandler(contentRef.current)
-      changeNameHandler(nameRef.current)
+      changeContentGlobalState(contentRef.current)
+      changeNameGlobalState(nameRef.current)
       if (contentRef.current) {
         dispatch(updateRecentIdeasList(ideaUuid))
       }

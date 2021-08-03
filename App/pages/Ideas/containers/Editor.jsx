@@ -11,12 +11,12 @@ export default () => {
   const ideaUuid = idea.uuid
   const worldUuid = useSelector(getCurrentWorldUuid)
 
-  const changeContentHandler = (content) => dispatch(changeContent({
+  const changeContentGlobalState = (content) => dispatch(changeContent({
     uuid: ideaUuid,
     content
   }))
 
-  const changeNameHandler = (name) => dispatch(changeName({
+  const changeNameGlobalState = (name) => dispatch(changeName({
     uuid: ideaUuid,
     name
   }))
@@ -26,8 +26,8 @@ export default () => {
       idea={idea}
       ideaUuid={ideaUuid}
       worldUuid={worldUuid}
-      changeContentHandler={changeContentHandler}
-      changeNameHandler={changeNameHandler}
+      changeContentGlobalState={changeContentGlobalState}
+      changeNameGlobalState={changeNameGlobalState}
     />
   )
 }

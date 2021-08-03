@@ -4,7 +4,7 @@ import WorldsView from '../components/Worlds'
 import { getWorldsData } from '../../../state/worlds'
 
 export default () => {
-  let data = useSelector(getWorldsData)
+  let worldsData = useSelector(getWorldsData)
 
-  return <WorldsView data={Object.keys(data)} />
+  return <WorldsView uuidList={Object.keys(worldsData)} />
 }
