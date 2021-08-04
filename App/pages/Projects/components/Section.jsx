@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import AddSectionButton from './AddSectionButton'
 import MoreButton from './MoreButton'
 import {
@@ -15,11 +15,9 @@ export default ({
   changeContentHandler,
   addButtonPressHandler
 }) => {
-  console.log(1)
+
   const sectionUuid = section.sectionUuid
-  console.log(2)
   const versionsList = Object.values(section.versions)
-  console.log(3, versionsList)
   return <FlatList
     horizontal
     data={versionsList}
@@ -46,14 +44,12 @@ export default ({
   />
 }
 
-
+const windowWidth = Dimensions.get('window').width
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    flexDirection: 'row'
-  },
+
   container: {
-    flex: 1,
+    display: 'flex',
+    width: windowWidth - 20,
     backgroundColor: '#ffffff',
     borderRadius: 4,
     shadowColor: '#000',
@@ -72,11 +68,11 @@ const styles = StyleSheet.create({
   editor: {
     alignSelf: 'stretch',
     padding: 10,
-    flex: 1,
     borderRadius: 8,
     fontSize: 16,
   },
   name: {
+    flex: 1,
     fontWeight: '600'
   }
 })

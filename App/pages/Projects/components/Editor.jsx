@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import { FlatList } from 'react-native'
 import Section from './Section'
 
@@ -23,7 +23,4 @@ export default ({
 
     }}
   />
-
-
-  {/* <View><Text>Her</Text></View> */ }
 }
