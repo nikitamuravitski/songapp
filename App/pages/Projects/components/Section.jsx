@@ -1,48 +1,59 @@
 import React from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet } from 'react-native'
 import AddSectionButton from './AddSectionButton'
-import { ScrollView, TextInput } from 'react-native'
+import MoreButton from './MoreButton'
+import {
+  TextInput,
+  FlatList
+} from 'react-native'
 import { View } from 'react-native'
 
 export default ({
-  data,
+  section,
   index,
   changeSectionNameHandler,
   changeContentHandler,
   addButtonPressHandler
 }) => {
-  const sectionUuid = data.sectionUuid
-  const versionsList = Object.values(data.versions).map(version => (
-    <View style={styles.container}>
-      <TextInput
-        value={data.name}
-        onChangeText={text => changeSectionNameHandler(data.sectionUuid, text)}
-      />
-      <TextInput
-        multiline
-        placeholder='What are you thinking?'
-        style={styles.editor}
-        onChangeText={text => changeContentHandler(sectionUuid, version.versionUuid, text)}
-        value={version.content}
-      />
-      <AddSectionButton index={index} addButtonPressHandler={addButtonPressHandler} />
-    </View>
-  )
-  )
-  return (
-    <ScrollView horizontal style={styles.wrapper}>
-      {versionsList}
-    </ScrollView>
-  )
+  console.log(1)
+  const sectionUuid = section.sectionUuid
+  console.log(2)
+  const versionsList = Object.values(section.versions)
+  console.log(3, versionsList)
+  return <FlatList
+    horizontal
+    data={versionsList}
+    keyExtractor={item => item.versionUuid}
+    renderItem={({ item }) => (
+      <View style={styles.container}>
+        <TextInput
+          style={styles.name}
+          value={section.name}
+          onChangeText={text => changeSectionNameHandler(sectionUuid, text)}
+        />
+        <TextInput
+          multiline
+          placeholder='What are you thinking?'
+          style={styles.editor}
+          onChangeText={text => changeContentHandler(sectionUuid, item.versionUuid, text)}
+          value={item.content}
+        />
+        <AddSectionButton index={index} addButtonPressHandler={addButtonPressHandler} />
+        <MoreButton />
+      </View>
+    )
+    }
+  />
 }
+
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1
+    flex: 1,
+    flexDirection: 'row'
   },
   container: {
     flex: 1,
-    position: 'relative',
     backgroundColor: '#ffffff',
     borderRadius: 4,
     shadowColor: '#000',
@@ -52,7 +63,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.22,
     shadowRadius: 3.22,
-
+    zIndex: 1000,
     elevation: 4,
     padding: 20,
     margin: 10,
@@ -62,9 +73,10 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     padding: 10,
     flex: 1,
-    backgroundColor: 'white',
     borderRadius: 8,
     fontSize: 16,
-    // lineHeight: 23
+  },
+  name: {
+    fontWeight: '600'
   }
 })
