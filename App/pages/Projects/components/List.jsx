@@ -1,5 +1,9 @@
 import React from 'react'
-import { View, Text, FlatList } from 'react-native'
+import {
+  View,
+  Text,
+  FlatList
+} from 'react-native'
 import { Paper } from '../../../components/Paper'
 
 export default ({ pressHandler, projects, name }) => {

@@ -90,11 +90,23 @@ const projectsSlice = createSlice({
       state.projectsData[projectUuid].sections[sectionUuid] = newSection
       state.projectsData[projectUuid].sectionsOrder.push(sectionUuid)
     },
-    //
     addVersion: (state, action) => {
-      const { sectionUuid, versionUuid } = action.payload
+      const { sectionUuid, versionUuid, projectUuid } = action.payload
+      const newVersion = {
+        versionUuid,
+        content: ''
+      }
+      state.projectsData[projectUuid].sections[sectionUuid].versions[versionUuid] = newVersion
     },
-    //
+    copyVersion: (state, action) => {
+      const { projectUuid, sectionUuid, versionUuid, newVersionUuid } = action.payload
+      let contentOfVersionToCopyFrom = state.projectsData[projectUuid].sections[sectionUuid].versions[versionUuid].content
+      const newVersion = {
+        versionUuid: newVersionUuid,
+        content: contentOfVersionToCopyFrom
+      }
+      state.projectsData[projectUuid].sections[sectionUuid].versions[newVersionUuid] = newVersion
+    },
     addSection: (state, action) => {
       const { index, newSectionUuid, projectUuid, versionUuid } = action.payload
       state.projectsData[projectUuid].sectionsOrder.splice(index + 1, 0, newSectionUuid)
@@ -111,6 +123,16 @@ const projectsSlice = createSlice({
         }
       }
       state.projectsData[projectUuid].sections[newSectionUuid] = newSection
+    },
+    copySection: (state, action) => {
+      const { projectUuid, sectionUuid, newSectionUuid, index } = action.payload
+      const sectionToCopyFrom = state.projectsData[projectUuid].sections[sectionUuid]
+      const newSection = {
+        ...sectionToCopyFrom,
+        sectionUuid: newSectionUuid
+      }
+      state.projectsData[projectUuid].sections[newSectionUuid] = newSection
+      state.projectsData[projectUuid].sectionsOrder.splice(index, 0, newSectionUuid)
     }
     // remove: (state, action) => {
     //   const { uuid } = action.payload
@@ -119,5 +141,14 @@ const projectsSlice = createSlice({
   }
 })
 
-export const { createProject, changeVersionContent, changeSectionName, addSection, setCurrentProjectUuid } = projectsSlice.actions
+export const {
+  createProject,
+  changeVersionContent,
+  changeSectionName,
+  addSection,
+  setCurrentProjectUuid,
+  addVersion,
+  copyVersion,
+  copySection
+} = projectsSlice.actions
 export const { reducer } = projectsSlice

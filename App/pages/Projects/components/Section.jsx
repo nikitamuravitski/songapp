@@ -1,12 +1,13 @@
 import React from 'react'
-import { StyleSheet, Dimensions } from 'react-native'
 import AddSectionButton from './AddSectionButton'
-import MoreButton from './MoreButton'
+import Menu from '../containers/SectionMenu'
 import {
+  View,
   TextInput,
-  FlatList
+  FlatList,
+  StyleSheet,
+  Dimensions
 } from 'react-native'
-import { View } from 'react-native'
 
 export default ({
   section,
@@ -18,26 +19,29 @@ export default ({
 
   const sectionUuid = section.sectionUuid
   const versionsList = Object.values(section.versions)
+
   return <FlatList
     horizontal
     data={versionsList}
     keyExtractor={item => item.versionUuid}
     renderItem={({ item }) => (
-      <View style={styles.container}>
-        <TextInput
-          style={styles.name}
-          value={section.name}
-          onChangeText={text => changeSectionNameHandler(sectionUuid, text)}
-        />
-        <TextInput
-          multiline
-          placeholder='What are you thinking?'
-          style={styles.editor}
-          onChangeText={text => changeContentHandler(sectionUuid, item.versionUuid, text)}
-          value={item.content}
-        />
+      <View style={styles.wrapper}>
+        <View style={styles.container}>
+          <TextInput
+            style={styles.name}
+            value={section.name}
+            onChangeText={text => changeSectionNameHandler(sectionUuid, text)}
+          />
+          <TextInput
+            multiline
+            placeholder='What are you thinking?'
+            style={styles.editor}
+            onChangeText={text => changeContentHandler(sectionUuid, item.versionUuid, text)}
+            value={item.content}
+          />
+          <Menu index={index} sectionUuid={sectionUuid} versionUuid={item.versionUuid} />
+        </View>
         <AddSectionButton index={index} addButtonPressHandler={addButtonPressHandler} />
-        <MoreButton />
       </View>
     )
     }
@@ -46,9 +50,11 @@ export default ({
 
 const windowWidth = Dimensions.get('window').width
 const styles = StyleSheet.create({
-
+  wrapper: {
+    flex: 1
+  },
   container: {
-    display: 'flex',
+    flex: 1,
     width: windowWidth - 20,
     backgroundColor: '#ffffff',
     borderRadius: 4,
@@ -59,20 +65,18 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.22,
     shadowRadius: 3.22,
-    zIndex: 1000,
     elevation: 4,
     padding: 20,
     margin: 10,
     marginBottom: 24
   },
   editor: {
-    alignSelf: 'stretch',
     padding: 10,
     borderRadius: 8,
-    fontSize: 16,
+    fontSize: 18,
   },
   name: {
-    flex: 1,
-    fontWeight: '600'
+    fontSize: 15,
+    fontWeight: '700'
   }
 })
