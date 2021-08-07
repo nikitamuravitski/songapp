@@ -1,25 +1,36 @@
 import React from 'react'
-import { StyleSheet, Image, TouchableOpacity } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity
+} from 'react-native'
+
 
 export default ({ index, addButtonPressHandler }) => (
   <TouchableOpacity
     style={styles.container}
     onPress={() => addButtonPressHandler(index)}
   >
-    <Image source={require('../../../assets/add.png')} style={{ width: 14, height: 14 }} />
+    <Image source={require('../../../assets/add.png')} style={styles.image} />
   </TouchableOpacity>
 )
 
 const styles = StyleSheet.create({
+  image: {
+    position: 'relative',
+    width: 12,
+    height: 12
+  },
   container: {
     position: 'absolute',
     display: 'flex',
     justifyContent: 'flex-end',
-    paddingBottom: 8,
+    paddingBottom: 6,
     alignItems: 'center',
     width: 30,
-    height: 20,
-    bottom: -20,
+    height: 30,
+    bottom: 3,
     right: 40,
 
     backgroundColor: 'white',
@@ -33,7 +44,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.22,
     shadowRadius: 3.22,
-    zIndex: -1,
-    elevation: 0
+
+    elevation: 2
   }
 })

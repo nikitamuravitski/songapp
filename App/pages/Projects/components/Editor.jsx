@@ -1,5 +1,4 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
 import { FlatList } from 'react-native'
 import Section from './Section'
 
@@ -20,7 +19,6 @@ export default ({
         changeContentHandler={changeContentHandler}
         addButtonPressHandler={addButtonPressHandler}
       />
-
     }}
   />
 }

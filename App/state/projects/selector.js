@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit'
 
-const getCurrentProjectUuid = (state) => state.Projects.currentProjectUuid
+export const getCurrentProjectUuid = (state) => state.Projects.currentProjectUuid
 export const getProjectsData = (state) => state.Projects.projectsData
 export const getCurrentProject = createSelector(
   getCurrentProjectUuid,
