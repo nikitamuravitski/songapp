@@ -12,11 +12,16 @@ export default ({ index, addButtonPressHandler }) => (
     style={styles.container}
     onPress={() => addButtonPressHandler(index)}
   >
-    <Image source={require('../../../assets/add.png')} style={{ position: 'relative', width: 12, height: 12 }} />
+    <Image source={require('../../../assets/add.png')} style={styles.image} />
   </TouchableOpacity>
 )
 
 const styles = StyleSheet.create({
+  image: {
+    position: 'relative',
+    width: 12,
+    height: 12
+  },
   container: {
     position: 'absolute',
     display: 'flex',

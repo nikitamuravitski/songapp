@@ -11,20 +11,16 @@ import {
   MenuTrigger,
 } from 'react-native-popup-menu';
 
-export default ({
-  addVersionHandler,
-  copyVersionHandler,
-  copySectionHandler
-}) => {
+export default ({ options }) => {
+  const menuOptions = options.map(option => <MenuOption onSelect={option.callback} text={option.label} />
+  )
   return <View style={styles.wrapper}>
     <Menu>
       <MenuTrigger customStyles={{ border: 0, borderRadius: 8 }}>
         <Image source={require('../../../assets/more.png')} style={{ width: 16, height: 16 }} />
       </MenuTrigger>
       <MenuOptions>
-        <MenuOption onSelect={() => copyVersionHandler()} text='Copy version' />
-        <MenuOption onSelect={() => addVersionHandler()} text='Add version' />
-        <MenuOption onSelect={() => copySectionHandler()} text='Copy section' />
+        {menuOptions}
       </MenuOptions>
     </Menu>
   </View>
