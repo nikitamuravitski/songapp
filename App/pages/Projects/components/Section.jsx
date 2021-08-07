@@ -8,13 +8,15 @@ import {
   StyleSheet,
   Dimensions
 } from 'react-native'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native'
 
 export default ({
   section,
   index,
   changeSectionNameHandler,
   changeContentHandler,
-  addButtonPressHandler
+  addButtonPressHandler,
 }) => {
 
   const sectionUuid = section.sectionUuid
@@ -22,6 +24,7 @@ export default ({
 
   return <FlatList
     horizontal
+    onLongPress
     data={versionsList}
     keyExtractor={item => item.versionUuid}
     renderItem={({ item }) => (
@@ -36,7 +39,7 @@ export default ({
             multiline
             placeholder='What are you thinking?'
             style={styles.editor}
-            onChangeText={text => changeContentHandler(sectionUuid, item.versionUuid, text)}
+            onChangeText={text => changeContentHandler(item.versionUuid, text)}
             value={item.content}
           />
           <Menu index={index} sectionUuid={sectionUuid} versionUuid={item.versionUuid} />
@@ -46,6 +49,7 @@ export default ({
     )
     }
   />
+
 }
 
 const windowWidth = Dimensions.get('window').width

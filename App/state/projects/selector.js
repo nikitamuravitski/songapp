@@ -10,5 +10,4 @@ export const getCurrentProject = createSelector(
     return projectsData[currentProjectUuid]
   }
 )
-
 export const getProjectData = projectUuid => state => state.Projects.projectsData[projectUuid]
