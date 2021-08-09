@@ -33,7 +33,7 @@ export default ({
           <TextInput
             style={styles.name}
             value={section.name}
-            onChangeText={text => changeSectionNameHandler(sectionUuid, text)}
+            onChangeText={text => changeSectionNameHandler(text)}
           />
           <TextInput
             multiline
