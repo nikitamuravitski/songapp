@@ -30,6 +30,7 @@ const ideasSlice = createSlice({
         name: 'New Idea',
         content: ''
       }
+      console.log(worldUuid)
       if (!state.ideas[worldUuid]) state.ideas[worldUuid] = []
       state.ideas[worldUuid].push(uuid)
       state.ideasData[uuid] = newIdea
