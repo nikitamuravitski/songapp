@@ -13,7 +13,8 @@ export const AddButtonContainer = (props) => {
   const dispatch = useDispatch()
   const navigation = useNavigation()
 
-  const projectData = useSelector(state => state.Projects.projectsData)
+  const projectData = useSelector(getProjectsData)
+
   let pressHandler
   if (props.buttonTitle === 'Add Idea') {
     pressHandler = () => {

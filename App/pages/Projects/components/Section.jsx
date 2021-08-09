@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import AddSectionButton from './AddSectionButton'
 import Menu from '../containers/SectionMenu'
 import {
@@ -10,6 +10,8 @@ import {
 } from 'react-native'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { TouchableOpacity } from 'react-native'
+import { useDispatch } from 'react-redux'
+import { setCurrentVersionUuid } from '../../../state/projects'
 
 export default ({
   section,
@@ -18,14 +20,28 @@ export default ({
   changeContentHandler,
   addButtonPressHandler,
 }) => {
-
+  const dispatch = useDispatch()
   const sectionUuid = section.sectionUuid
   const versionsList = Object.values(section.versions)
-
+  const currentVersionUuid = section.currentVersion
+  const currentIndex = versionsList.findIndex(version => version.versionUuid === currentVersionUuid)
+  const viewabilityConfig = {
+    minimumViewTime: 1000,
+    viewAreaCoveragePercentThreshold: 95
+  }
+  const handleViewableItemsChange = useCallback(({ viewableItems }) => {
+    if (viewableItems.length > 0)
+      dispatch(setCurrentVersionUuid({ sectionUuid, versionUuid: viewableItems[0].key })) // dispatch here
+  }, [])
+  const { width } = Dimensions.get('window')
   return <FlatList
     horizontal
-    onLongPress
     data={versionsList}
+    snapToInterval={width}
+    onViewableItemsChanged={handleViewableItemsChange}
+    viewabilityConfig={viewabilityConfig}
+    // decelerationRate={0}
+    initialScrollIndex={currentIndex}
     keyExtractor={item => item.versionUuid}
     renderItem={({ item }) => (
       <View style={styles.wrapper}>

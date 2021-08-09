@@ -8,20 +8,27 @@ export default ({
   sectionUuidList
 }) => {
   const dispatch = useDispatch()
-  return <DraggableFlatList
-    data={sectionUuidList}
-    keyExtractor={item => item}
-    renderItem={({ item, index, drag }) => {
-      return (
-        <TouchableOpacity onLongPress={drag}>
-          <Section
-            index={index}
-            sectionUuid={item}
-          />
-        </TouchableOpacity>
-      )
-    }}
-    // onDragBegin={index => }
-    onDragEnd={({ data }) => dispatch(updateSectionsOrder(data))}
-  />
+  return <>
+    <DraggableFlatList
+      keyboardDismissMode='none'
+      data={sectionUuidList}
+      keyExtractor={item => item}
+      renderItem={({ item, index, drag }) => {
+        return (
+          <TouchableOpacity
+            onLongPress={drag}
+            activeOpacity={0.8}
+          >
+            <Section
+              index={index}
+              sectionUuid={item}
+            />
+          </TouchableOpacity>
+        )
+      }}
+      // onDragBegin={index => }
+      onDragEnd={({ data }) => dispatch(updateSectionsOrder(data))}
+    />
+    <AddButton buttonTitle='Add Idea' />
+  </>
 }
