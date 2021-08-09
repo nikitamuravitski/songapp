@@ -20,7 +20,7 @@ const projectsSlice = createSlice({
             versions: {
               'version3': {
                 versionUuid: 'version3',
-                content: 'mamamam ds badum'
+                content: '1'
               }
             }
           },
@@ -32,7 +32,7 @@ const projectsSlice = createSlice({
             versions: {
               'version2': {
                 versionUuid: 'version2',
-                content: 'paparapa badumdadam'
+                content: '2'
               }
             }
           },
@@ -44,7 +44,7 @@ const projectsSlice = createSlice({
             versions: {
               'version1': {
                 versionUuid: 'version1',
-                content: 'paparapa badum'
+                content: '3'
               }
             }
           }
@@ -133,6 +133,10 @@ const projectsSlice = createSlice({
       }
       state.projectsData[projectUuid].sections[newSectionUuid] = newSection
       state.projectsData[projectUuid].sectionsOrder.splice(index, 0, newSectionUuid)
+    },
+    updateSectionsOrder: (state, action) => {
+      const currentProjectUuid = state.currentProjectUuid
+      state.projectsData[currentProjectUuid].sectionsOrder = action.payload
     }
     // remove: (state, action) => {
     //   const { uuid } = action.payload
@@ -149,6 +153,7 @@ export const {
   setCurrentProjectUuid,
   addVersion,
   copyVersion,
-  copySection
+  copySection,
+  updateSectionsOrder
 } = projectsSlice.actions
 export const { reducer } = projectsSlice

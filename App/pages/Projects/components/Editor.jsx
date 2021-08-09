@@ -1,24 +1,27 @@
 import React from 'react'
-import { FlatList } from 'react-native'
-import Section from './Section'
-
+import { TouchableOpacity } from 'react-native'
+import Section from '../containers/Section'
+import DraggableFlatList from 'react-native-draggable-flatlist'
+import { useDispatch } from 'react-redux'
+import { updateSectionsOrder } from '../../../state/projects'
 export default ({
-  changeContentHandler,
-  changeSectionNameHandler,
-  sectionList,
-  addButtonPressHandler
+  sectionUuidList
 }) => {
-  return <FlatList
-    data={sectionList}
-    keyExtractor={item => item.sectionUuid}
-    renderItem={({ item, index }) => {
-      return <Section
-        index={index}
-        section={item}
-        changeSectionNameHandler={changeSectionNameHandler}
-        changeContentHandler={changeContentHandler}
-        addButtonPressHandler={addButtonPressHandler}
-      />
+  const dispatch = useDispatch()
+  return <DraggableFlatList
+    data={sectionUuidList}
+    keyExtractor={item => item}
+    renderItem={({ item, index, drag }) => {
+      return (
+        <TouchableOpacity onLongPress={drag}>
+          <Section
+            index={index}
+            sectionUuid={item}
+          />
+        </TouchableOpacity>
+      )
     }}
+    // onDragBegin={index => }
+    onDragEnd={({ data }) => dispatch(updateSectionsOrder(data))}
   />
 }
