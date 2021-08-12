@@ -13,7 +13,8 @@ export const AddButtonContainer = (props) => {
   const dispatch = useDispatch()
   const navigation = useNavigation()
 
-  const projectsData = useSelector(getProjectsData)
+
+  const projectData = useSelector(getProjectsData)
   const worldUuid = useSelector(getCurrentWorldUuid)
 
   let pressHandler

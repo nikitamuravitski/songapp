@@ -11,11 +11,16 @@ export default ({
   const dispatch = useDispatch()
   return <>
     <DraggableFlatList
+      keyboardDismissMode='none'
+
       data={sectionUuidList}
       keyExtractor={item => item}
       renderItem={({ item, index, drag }) => {
         return (
-          <TouchableOpacity onLongPress={drag}>
+          <TouchableOpacity
+            onLongPress={drag}
+            activeOpacity={0.8}
+          >
             <Section
               index={index}
               sectionUuid={item}

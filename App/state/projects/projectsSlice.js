@@ -141,6 +141,11 @@ const projectsSlice = createSlice({
     updateSectionsOrder: (state, action) => {
       const currentProjectUuid = state.currentProjectUuid
       state.projectsData[currentProjectUuid].sectionsOrder = action.payload
+    },
+    setCurrentVersionUuid: (state, action) => {
+      const { sectionUuid, versionUuid } = action.payload
+      const currentProjectUuid = state.currentProjectUuid
+      state.projectsData[currentProjectUuid].sections[sectionUuid].currentVersion = versionUuid
     }
     // remove: (state, action) => {
     //   const { uuid } = action.payload
@@ -160,7 +165,8 @@ export const {
   addVersion,
   copyVersion,
   copySection,
-  updateSectionsOrder
+  updateSectionsOrder,
+  setCurrentVersionUuid
 
 } = projectsSlice.actions
 export const { reducer } = projectsSlice
