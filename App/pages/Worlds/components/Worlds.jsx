@@ -7,9 +7,9 @@ import { setCurrentWorldUuid } from '../../../state/worlds'
 
 export default ({ uuidList }) => {
   const dispatch = useDispatch()
-  useEffect(() => {
-    return () => dispatch(setCurrentWorldUuid(null))
-  }, [])
+  // useEffect(() => {
+  //   return () => dispatch(setCurrentWorldUuid(null))
+  // }, [])
 
   return (
     <View>

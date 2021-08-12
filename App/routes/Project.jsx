@@ -6,7 +6,7 @@ import { AddButton } from '../components/AddButton'
 
 const Tab = createMaterialTopTabNavigator()
 
-export const Project = ({ route }) => {
+export const Project = () => {
   return (
     <>
       <Tab.Navigator>

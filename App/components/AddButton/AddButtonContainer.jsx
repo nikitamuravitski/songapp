@@ -2,8 +2,8 @@ import React from 'react'
 import { AddButtonView } from './AddButtonView'
 import { useNavigation } from '@react-navigation/native'
 import { createIdea, setCurrentIdeaUuid } from '../../state/ideas'
-import { createProject, setCurrentProjectUuid } from '../../state/projects'
-import { addIdeaToWorld, createWorld, setCurrentWorldUuid } from '../../state/worlds'
+import { createProject, getProjectsData, setCurrentProjectUuid } from '../../state/projects'
+import { addIdeaToWorld, createWorld, getCurrentWorldUuid, setCurrentWorldUuid } from '../../state/worlds'
 import { createWorldForIdeas } from '../../state/ideas'
 import { useDispatch, useSelector } from 'react-redux'
 import 'react-native-get-random-values'
@@ -13,22 +13,24 @@ export const AddButtonContainer = (props) => {
   const dispatch = useDispatch()
   const navigation = useNavigation()
 
-  const projectData = useSelector(state => state.Projects.projectsData)
+  const projectsData = useSelector(getProjectsData)
+  const worldUuid = useSelector(getCurrentWorldUuid)
+
   let pressHandler
   if (props.buttonTitle === 'Add Idea') {
     pressHandler = () => {
       const ideaUuid = `idea.${uuid.v4()}`
       if (props.projectUuid) {
-        const worldUuid = projectData[props.projectUuid].worldUuid
+        if (worldUuid === null) worldUuid = 'unsorted'
         dispatch(setCurrentIdeaUuid(ideaUuid))
-        dispatch(createIdea({ uuid: ideaUuid, worldUuid: worldUuid }))
-        dispatch(addIdeaToWorld({ ideaUuid: ideaUuid, worldUuid: worldUuid }))
+        dispatch(createIdea({ uuid: ideaUuid, worldUuid }))
+        dispatch(addIdeaToWorld({ ideaUuid, worldUuid }))
       } else {
         dispatch(setCurrentIdeaUuid(ideaUuid))
-        dispatch(createIdea({ uuid: ideaUuid, worldUuid: 'unsorted' }))
-        dispatch(addIdeaToWorld({ ideaUuid: ideaUuid, worldUuid: 'unsorted' }))
+        dispatch(createIdea({ uuid: ideaUuid, worldUuid }))
+        dispatch(addIdeaToWorld({ ideaUuid, worldUuid }))
       }
-      navigation.navigate('Idea Editor', { name: 'New Idea', uuid: ideaUuid, type: 'IDEA' })
+      navigation.navigate('Idea Editor', { name: 'New Idea' })
     }
   }
   if (props.buttonTitle === 'Create Project') {
