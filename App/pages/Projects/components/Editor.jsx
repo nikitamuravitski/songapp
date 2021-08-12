@@ -4,6 +4,7 @@ import Section from '../containers/Section'
 import DraggableFlatList from 'react-native-draggable-flatlist'
 import { useDispatch } from 'react-redux'
 import { updateSectionsOrder } from '../../../state/projects'
+import { AddButton } from '../../../components/AddButton'
 export default ({
   sectionUuidList
 }) => {
@@ -11,6 +12,7 @@ export default ({
   return <>
     <DraggableFlatList
       keyboardDismissMode='none'
+
       data={sectionUuidList}
       keyExtractor={item => item}
       renderItem={({ item, index, drag }) => {

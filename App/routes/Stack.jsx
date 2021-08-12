@@ -6,6 +6,10 @@ import { Project } from './Project'
 import { Editor } from '../components/Editor'
 import IdeaEditor from '../pages/Ideas/containers/Editor'
 import { NavigationContainer } from '@react-navigation/native'
+import { useDispatch } from 'react-redux'
+import { getCurrentProjectName } from '../state/projects'
+import { useEffect } from 'react'
+import ProjectMenu from './components/ProjectMenu'
 
 const Stack = createStackNavigator()
 
@@ -28,11 +32,12 @@ export const StackNavigator = () => {
         <Stack.Screen
           name='Project'
           component={Project}
-          options={({ route }) => (
-            {
-              headerRight: () => <Text>Button</Text>,
+          options={({ route }) => {
+            return {
+              headerRight: () => <ProjectMenu />,
               title: route.params.name
-            })}
+            }
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
