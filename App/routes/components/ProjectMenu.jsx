@@ -10,10 +10,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentProjectUuid, getCurrentProject, renameProject } from '../../state/projects';
 import RenameProjectModal from './RenameProjectModal'
 
+import hamburgerIcon from '../../assets/hamburger-icon.png'
+
 
 export default () => {
   const dispatch = useDispatch()
-  const [modalVisible, setModalVisible] = useState(false)
+  const [isModalVisible, setModalVisible] = useState(false)
   const projectUuid = useSelector(getCurrentProjectUuid)
   const project = useSelector(getCurrentProject)
   const renameProjectHandler = (newName) => {
@@ -29,7 +31,7 @@ export default () => {
   return <View style={styles.wrapper}>
     <Menu>
       <MenuTrigger customStyles={{ border: 0, borderRadius: 8 }}>
-        <Image source={require('../../assets/hamburger-icon.png')} style={{ width: 20, height: 20 }} />
+        <Image source={hamburgerIcon} style={{ width: 20, height: 20 }} />
       </MenuTrigger>
       <MenuOptions>
         {menuOptions}
@@ -38,7 +40,7 @@ export default () => {
     <RenameProjectModal
       projectName={project.name}
       renameProjectHandler={renameProjectHandler}
-      modalVisible={modalVisible}
+      ismodalVisible={isModalVisible}
       setModalVisible={setModalVisible}
     />
   </View>

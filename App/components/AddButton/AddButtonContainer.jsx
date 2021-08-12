@@ -16,7 +16,6 @@ export const AddButtonContainer = (props) => {
   const projectsData = useSelector(getProjectsData)
   const worldUuid = useSelector(getCurrentWorldUuid)
 
-  console.log(projectsData)
   let pressHandler
   if (props.buttonTitle === 'Add Idea') {
     pressHandler = () => {

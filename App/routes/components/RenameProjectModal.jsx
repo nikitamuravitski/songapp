@@ -4,7 +4,7 @@ import { TextInput, Modal, StyleSheet, Text, Pressable, View } from "react-nativ
 export default ({
   projectName,
   renameProjectHandler,
-  modalVisible,
+  isModalVisible,
   setModalVisible
 }) => {
   const [name, setName] = useState(projectName)
@@ -31,7 +31,7 @@ export default ({
       <Modal
         animationType="fade"
         transparent={true}
-        visible={modalVisible}
+        visible={isModalVisible}
         onRequestClose={() => onCloseHandler()}
       >
         <View style={styles.centeredView}>
@@ -43,7 +43,7 @@ export default ({
               onChangeText={text => setName(text)}
             />
             <Pressable
-              style={savePress ? [styles.button, styles.buttonClose] : [styles.button, styles.buttonOpen]}
+              style={[styles.button, savePress ? styles.buttonClose : styles.buttonOpen]}
               onPress={() => onSaveHandler()}
             >
               <Text
