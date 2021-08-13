@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux'
 import { getCurrentProjectName } from '../state/projects'
 import { useEffect } from 'react'
 import ProjectMenu from './components/ProjectMenu'
-
+import { MAIN, IDEA_EDITOR, EDITOR, PROJECT } from './routes'
 const Stack = createStackNavigator()
 
 export const StackNavigator = () => {
@@ -18,19 +18,19 @@ export const StackNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName='Main'
+        initialRouteName={MAIN}
       >
-        <Stack.Screen name='Main' component={Tabs} options={{ headerShown: false }} />
-        <Stack.Screen name='Idea Editor' component={IdeaEditor} />
+        <Stack.Screen name={MAIN} component={Tabs} options={{ headerShown: false }} />
+        <Stack.Screen name={IDEA_EDITOR} component={IdeaEditor} />
         <Stack.Screen
-          name='Editor'
+          name={EDITOR}
           component={Editor}
           options={({ route }) => ({
             title: route.params.name
           })}
         />
         <Stack.Screen
-          name='Project'
+          name={PROJECT}
           component={Project}
           options={({ route }) => {
             return {

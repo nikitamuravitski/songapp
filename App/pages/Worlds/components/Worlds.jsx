@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
 
 import { View, Text, FlatList } from 'react-native'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Ideas from '../../Ideas/containers/List'
 import { setCurrentWorldUuid } from '../../../state/worlds'
+import { StyleSheet } from 'react-native'
 
 export default ({ uuidList }) => {
   const dispatch = useDispatch()
+
   // useEffect(() => {
   //   return () => dispatch(setCurrentWorldUuid(null))
   // }, [])
@@ -15,10 +17,10 @@ export default ({ uuidList }) => {
     <View>
       <FlatList
         data={uuidList}
-        keyExtractor={(item) => item.uuid}
+        keyExtractor={(item) => item}
         renderItem={({ item }) => (
           <View>
-            <Text>{item}</Text>
+            <Text style={styles.name}>{item}</Text>
             <Ideas worldUuid={item} />
           </View>
         )}
@@ -26,3 +28,10 @@ export default ({ uuidList }) => {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  name: {
+    paddingTop: 10,
+    paddingLeft: 20
+  }
+})

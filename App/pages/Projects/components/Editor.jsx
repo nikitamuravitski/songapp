@@ -12,7 +12,7 @@ export default ({
   return <>
     <DraggableFlatList
       keyboardDismissMode='none'
-
+      ListFooterComponentStyle={{ paddingTop: 10 }}
       data={sectionUuidList}
       keyExtractor={item => item}
       renderItem={({ item, index, drag }) => {

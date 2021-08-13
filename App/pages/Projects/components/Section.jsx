@@ -12,6 +12,7 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { TouchableOpacity } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { setCurrentVersionUuid } from '../../../state/projects'
+import VersionCounter from './VersionCounter'
 
 export default ({
   section,
@@ -22,12 +23,13 @@ export default ({
 }) => {
   const dispatch = useDispatch()
   const sectionUuid = section.sectionUuid
-  const versionsList = Object.values(section.versions)
+  let versionsUuidList = section.versionsOrder
+  let versionsList = versionsUuidList.map(uuid => section.versions[uuid])
   const currentVersionUuid = section.currentVersion
-  const currentIndex = versionsList.findIndex(version => version.versionUuid === currentVersionUuid)
+  const currentIndex = versionsUuidList.findIndex(uuid => uuid === currentVersionUuid)
   const viewabilityConfig = {
-    minimumViewTime: 1000,
-    viewAreaCoveragePercentThreshold: 95
+    minimumViewTime: 30,
+    viewAreaCoveragePercentThreshold: 75
   }
   const handleViewableItemsChange = useCallback(({ viewableItems }) => {
     if (viewableItems.length > 0)
@@ -40,7 +42,7 @@ export default ({
     snapToInterval={width}
     onViewableItemsChanged={handleViewableItemsChange}
     viewabilityConfig={viewabilityConfig}
-    // decelerationRate={0}
+    decelerationRate={0.9}
     initialScrollIndex={currentIndex}
     keyExtractor={item => item.versionUuid}
     renderItem={({ item }) => (
@@ -59,6 +61,7 @@ export default ({
             value={item.content}
           />
           <Menu index={index} sectionUuid={sectionUuid} versionUuid={item.versionUuid} />
+          <VersionCounter versionsList={versionsList} currentVersionUuid={currentVersionUuid} />
         </View>
         <AddSectionButton index={index} addButtonPressHandler={addButtonPressHandler} />
       </View>

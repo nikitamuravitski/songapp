@@ -10,14 +10,14 @@ import {
   MenuOption,
   MenuTrigger,
 } from 'react-native-popup-menu';
-
+import moreButton from '../../../assets/more.png'
 export default ({ options }) => {
   const menuOptions = options.map(option => <MenuOption key={option.label} onSelect={option.callback} text={option.label} />
   )
   return <View style={styles.wrapper}>
     <Menu>
       <MenuTrigger customStyles={{ border: 0, borderRadius: 8 }}>
-        <Image source={require('../../../assets/more.png')} style={{ width: 20, height: 20 }} />
+        <Image source={moreButton} style={{ width: 20, height: 20 }} />
       </MenuTrigger>
       <MenuOptions>
         {menuOptions}

@@ -7,6 +7,7 @@ import Worlds from '../pages/Worlds/containers/Worlds'
 import Ideas from '../pages/Ideas/containers/List'
 import { Finished } from '../pages/Finished'
 import { AddButton } from '../components/AddButton'
+import { HOME, PROJECTS, WORLDS, IDEAS, FINISHED } from './routes'
 
 import { Image } from 'react-native'
 
@@ -14,10 +15,10 @@ const Tab = createMaterialTopTabNavigator()
 
 const getButtonName = (currentRoute) => {
   let name = ''
-  if (currentRoute === 'Home') name = 'Add Idea'
-  if (currentRoute === 'Projects') name = 'Create Project'
-  if (currentRoute === 'Worlds') name = 'Create World'
-  if (currentRoute === 'Ideas') name = 'Add Idea'
+  if (currentRoute === HOME) name = 'Add Idea'
+  if (currentRoute === PROJECTS) name = 'Create Project'
+  if (currentRoute === WORLDS) name = 'Create World'
+  if (currentRoute === IDEAS) name = 'Add Idea'
   return name
 }
 export const Tabs = () => {
@@ -27,17 +28,17 @@ export const Tabs = () => {
   })
   const [selectedGroupValue, setSelectedGroupValue] = useState({
     firstGroup: {
-      name: 'Projects',
+      name: PROJECTS,
       component: ProjectsList
     },
     secondGroup: {
-      name: 'Ideas',
+      name: IDEAS,
       component: Ideas
     }
   })
 
   const { state } = useRoute()
-  let currentRoute = 'Home'
+  let currentRoute = HOME
   let buttonTitle = ''
   if (state) currentRoute = state.routeNames[state.index]
   buttonTitle = getButtonName(currentRoute)
@@ -53,7 +54,7 @@ export const Tabs = () => {
           }
         }}
       >
-        <Tab.Screen name='Home' component={Home} />
+        <Tab.Screen name={HOME} component={Home} />
         <Tab.Screen
           name={selectedGroupValue.firstGroup.name}
           component={selectedGroupValue.firstGroup.component}
@@ -64,7 +65,7 @@ export const Tabs = () => {
                 setSelectedGroupValue({
                   ...selectedGroupValue,
                   firstGroup: {
-                    name: 'Finished',
+                    name: FINISHED,
                     component: Finished
                   }
                 })
@@ -72,7 +73,7 @@ export const Tabs = () => {
                 setSelectedGroupValue({
                   ...selectedGroupValue,
                   firstGroup: {
-                    name: 'Projects',
+                    name: PROJECTS,
                     component: ProjectsList
                   }
                 })
@@ -97,7 +98,7 @@ export const Tabs = () => {
                 setSelectedGroupValue({
                   ...selectedGroupValue,
                   secondGroup: {
-                    name: 'Worlds',
+                    name: WORLDS,
                     component: Worlds
                   }
                 })
@@ -105,7 +106,7 @@ export const Tabs = () => {
                 setSelectedGroupValue({
                   ...selectedGroupValue,
                   secondGroup: {
-                    name: 'Ideas',
+                    name: IDEAS,
                     component: Ideas
                   }
                 })

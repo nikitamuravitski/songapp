@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, current } from '@reduxjs/toolkit'
 
 const projectsSlice = createSlice({
   name: 'projects',
@@ -17,6 +17,7 @@ const projectsSlice = createSlice({
             type: 'TEXT',
             name: 'Papa has',
             currentVersion: 'version3',
+            versionsOrder: ['version3'],
             versions: {
               'version3': {
                 versionUuid: 'version3',
@@ -29,6 +30,7 @@ const projectsSlice = createSlice({
             type: 'TEXT',
             name: 'Papa has',
             currentVersion: 'version2',
+            versionsOrder: ['version2'],
             versions: {
               'version2': {
                 versionUuid: 'version2',
@@ -41,6 +43,7 @@ const projectsSlice = createSlice({
             type: 'TEXT',
             name: 'Papa has',
             currentVersion: 'version1',
+            versionsOrder: ['version1'],
             versions: {
               'version1': {
                 versionUuid: 'version1',
@@ -100,6 +103,7 @@ const projectsSlice = createSlice({
         versionUuid,
         content: ''
       }
+      state.projectsData[projectUuid].sections[sectionUuid].versionsOrder.push(versionUuid)
       state.projectsData[projectUuid].sections[sectionUuid].versions[versionUuid] = newVersion
     },
     copyVersion: (state, action) => {
@@ -109,6 +113,8 @@ const projectsSlice = createSlice({
         versionUuid: newVersionUuid,
         content: contentOfVersionToCopyFrom
       }
+      const index = state.projectsData[projectUuid].sections[sectionUuid].versionsOrder.indexOf(versionUuid)
+      state.projectsData[projectUuid].sections[sectionUuid].versionsOrder.splice(index + 1, 0, newVersionUuid)
       state.projectsData[projectUuid].sections[sectionUuid].versions[newVersionUuid] = newVersion
     },
     addSection: (state, action) => {
@@ -138,6 +144,19 @@ const projectsSlice = createSlice({
       state.projectsData[projectUuid].sections[newSectionUuid] = newSection
       state.projectsData[projectUuid].sectionsOrder.splice(index, 0, newSectionUuid)
     },
+    removeVersion: (state, action) => {
+      const { projectUuid, sectionUuid, versionUuid } = action.payload
+      delete state.projectsData[projectUuid].sections[sectionUuid].versions[versionUuid]
+      if (state.projectsData[projectUuid].sections[sectionUuid].currentVersion === versionUuid)
+        state.projectsData[projectUuid].sections[sectionUuid].currentVersion = null
+    },
+    removeSection: (state, action) => {
+      const { projectUuid, sectionUuid } = action.payload
+      delete state.projectsData[projectUuid].sections[sectionUuid]
+      const index = state.projectsData[projectUuid].sectionsOrder.indexOf(sectionUuid)
+      state.projectsData[projectUuid].sectionsOrder.splice(index, 1)
+
+    },
     updateSectionsOrder: (state, action) => {
       const currentProjectUuid = state.currentProjectUuid
       state.projectsData[currentProjectUuid].sectionsOrder = action.payload
@@ -165,6 +184,8 @@ export const {
   addVersion,
   copyVersion,
   copySection,
+  removeVersion,
+  removeSection,
   updateSectionsOrder,
   setCurrentVersionUuid
 

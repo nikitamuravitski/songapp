@@ -4,7 +4,7 @@ import { changeContent, changeName, getCurrentIdea } from '../../../state/ideas'
 import { getCurrentWorldUuid } from '../../../state/worlds'
 import EditorView from '../components/Editor'
 
-export default () => {
+export default (props) => {
   const dispatch = useDispatch()
 
   const idea = useSelector(getCurrentIdea)

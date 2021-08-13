@@ -6,6 +6,7 @@ import { getCurrentProjectName, getProjectsData, setCurrentProjectUuid } from '.
 import { setCurrentWorldUuid } from '../../../state/worlds'
 
 import ListView from '../components/List'
+import { PROJECT, PROJECT_PAGE } from '../../../routes/routes'
 
 export default ({ recent }) => {
   const dispatch = useDispatch()
@@ -16,7 +17,7 @@ export default ({ recent }) => {
     const project = projects[projectUuid]
     dispatch(setCurrentProjectUuid(projectUuid))
     dispatch(setCurrentWorldUuid(project.worldUuid))
-    navigation.push('Project', { screen: 'Project Page', name: project.name })
+    navigation.push(PROJECT, { screen: PROJECT_PAGE, name: project.name })
   }
 
   return (

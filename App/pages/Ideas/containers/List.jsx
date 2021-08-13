@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentIdeaUuid, getIdeasList, getRecentIdeasList } from '../../../state/ideas'
 import RecentIdeasView from '../components/Recent'
+import { getCurrentWorldUuid } from '../../../state/worlds'
 
 
 export default ({ worldUuid, recent }) => {
@@ -11,9 +12,9 @@ export default ({ worldUuid, recent }) => {
   const navigation = useNavigation()
   let ideasList = useSelector(getIdeasList(worldUuid)) // [idea3, idea4]
   let recentIdeasList = useSelector(getRecentIdeasList)
-  const pressHandler = (params) => {
-    navigation.push('Editor', { ...params })
-    dispatch(setCurrentIdeaUuid(params.uuid))
+  const pressHandler = (uuid) => {
+    navigation.push('Idea Editor')
+    dispatch(setCurrentIdeaUuid(uuid))
   }
   if (recent) {
     // for now, needs to be properly reworked by date

@@ -25,6 +25,9 @@ export default () => {
     {
       label: 'Rename',
       callback: () => setModalVisible(true)
+    },
+    {
+      label: 'Remove'
     }
   ]
   const menuOptions = options.map(option => <MenuOption onSelect={option.callback} text={option.label} />)
@@ -40,7 +43,7 @@ export default () => {
     <RenameProjectModal
       projectName={project.name}
       renameProjectHandler={renameProjectHandler}
-      ismodalVisible={isModalVisible}
+      isModalVisible={isModalVisible}
       setModalVisible={setModalVisible}
     />
   </View>

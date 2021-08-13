@@ -11,6 +11,5 @@ export default ({ worldUuid }) => {
   //   return () => dispatch(setCurrentWorldUuid(null))
   // }, [])
 
-
   return <Ideas worldUuid={worldUuid} />
 }
